@@ -34,7 +34,7 @@ public class DriverFactory {
                 if (headless) edgeOptions.addArguments("--headless=new");
                 tlDriver.set(new EdgeDriver(edgeOptions));
             }
-            case "chrome", default -> {
+            default -> {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-allow-origins=*");

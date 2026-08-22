@@ -1,4 +1,5 @@
-# HADIR Automation Testing Framework (MFD Style)
+# team1-juaracoding-finalproject
+Final Project untuk Pelatihan Juara Coding - SQA Automation Testing Framework
 
 Framework otomatisasi pengujian lengkap untuk aplikasi **HADIR** (Web Admin & Mobile Mirroring) berbasis **Java + Maven + Cucumber BDD + TestNG + Selenium + REST Assured**.
 
@@ -49,7 +50,7 @@ free_TA/
 ---
 
 ## ⚙️ Prasyarat (Prerequisites)
-1. **Java JDK 17** (atau JDK 11+)
+1. **Java JDK 17 / 21**
 2. **Apache Maven 3.8+**
 3. **Google Chrome / Microsoft Edge** Browser
 
