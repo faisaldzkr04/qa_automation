@@ -1,0 +1,18 @@
+package com.finalproject1.runners;
+
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+
+@CucumberOptions(
+        features = "src/test/features",
+        glue = {"com.finalproject1.stepdefinitions"},
+        tags = "@api",
+        plugin = {
+                "pretty",
+                "html:target/cucumber-reports/api-cucumber-pretty.html",
+                "json:target/cucumber-reports/ApiCucumberTestReport.json"
+        },
+        monochrome = true
+)
+public class ApiTestRunner extends AbstractTestNGCucumberTests {
+}
