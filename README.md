@@ -8,43 +8,48 @@ Framework otomatisasi pengujian lengkap untuk aplikasi **HADIR** (Web Admin & Mo
 ## 📁 Struktur Folder Project
 
 ```text
-free_TA/
+tugas-akhir-kelompok-satu/
 ├── pom.xml                                  # Konfigurasi Maven & Dependensi
 ├── testng.xml                               # Suite runner TestNG
-├── README.md                                # Petunjuk penggunaan framework
 ├── src/
 │   ├── main/
 │   │   └── java/
-│   │       └── com/hadir/
+│   │       └── com/finalproject1/
 │   │           ├── api/                     # REST Assured API Services & Endpoints
 │   │           │   ├── ApiEndpoints.java
 │   │           │   └── AuthApiService.java
 │   │           ├── pages/                   # Page Object Model (POM)
 │   │           │   ├── BasePage.java
+│   │           │   ├── AdminDashboardPage.java
+│   │           │   ├── AdminLaporanPage.java
 │   │           │   ├── AdminLoginPage.java
-│   │           │   ├── UserLoginPage.java
-│   │           │   └── UserDashboardPage.java
+│   │           │   ├── AdminManagementUserPage.java
+│   │           │   ├── AdminMasterDataPage.java
+│   │           │   ├── AttendancePage.java
+│   │           │   ├── DashboardMenuPage.java
+│   │           │   ├── RegisterPage.java
+│   │           │   ├── UserDashboardPage.java
+│   │           │   └── UserLoginPage.java
 │   │           └── utils/                   # Config & WebDriver Factory
-│   │               ├── ConfigReader.java
-│   │               └── DriverFactory.java
 │   └── test/
-│       ├── java/
-│       │   └── com/hadir/
-│       │       ├── runners/                 # TestNG Cucumber Runner
-│       │       │   ├── TestRunner.java      # UI Test Runner
-│       │       │   └── ApiTestRunner.java   # API Test Runner
-│       │       └── stepdefinitions/         # Glue code Cucumber
-│       │           ├── Hooks.java           # Setup & Teardown WebDriver per scenario
-│       │           ├── AdminLoginSteps.java
-│       │           ├── UserLoginSteps.java
-│       │           └── ApiAuthSteps.java
-│       └── resources/
-│           ├── config.properties            # URL & Credentials konfigurasi
-│           └── features/                    # Skenario BDD Gherkin (.feature)
-│               ├── 01_admin_login.feature
-│               ├── 02_user_login.feature
-│               ├── 03_user_absen.feature
-│               └── 04_api_auth.feature
+│       ├── config.properties               # URL & Credentials konfigurasi
+│       ├── features/                        # Skenario BDD Gherkin (.feature)
+│       │   ├── 01_admin_login.feature
+│       │   ├── 02_user_login.feature
+│       │   ├── 03_user_absen.feature
+│       │   ├── 04_api_auth.feature
+│       │   ├── 05_user_registration.feature
+│       │   ├── 06_absen_masuk_keluar.feature
+│       │   ├── 07_user_dashboard_menus.feature
+│       │   ├── 08_admin_management_user.feature
+│       │   ├── 09_admin_laporan_approval.feature
+│       │   └── 10_admin_master_data.feature
+│       └── java/
+│           └── com/finalproject1/
+│               ├── runners/                 # TestNG Cucumber Runner
+│               │   ├── TestRunner.java      # UI Test Runner
+│               │   └── ApiTestRunner.java   # API Test Runner
+│               └── stepdefinitions/         # Glue code Cucumber
 ```
 
 ---
@@ -77,7 +82,7 @@ mvn clean test
   mvn test -Dcucumber.filter.tags="@smoke"
   ```
 * **Mode Headless Browser (tanpa membuka window browser)**:
-  Ubah di `src/test/resources/config.properties`:
+  Ubah di `tugas-akhir-kelompok-satu/src/test/config.properties`:
   ```properties
   headless=true
   ```
