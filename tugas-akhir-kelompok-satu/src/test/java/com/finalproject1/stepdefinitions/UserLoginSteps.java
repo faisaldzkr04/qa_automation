@@ -1,14 +1,16 @@
 package com.finalproject1.stepdefinitions;
 
+import org.testng.Assert;
+
 import com.finalproject1.pages.UserDashboardPage;
 import com.finalproject1.pages.UserLoginPage;
 import com.finalproject1.utils.ConfigReader;
 import com.finalproject1.utils.DriverFactory;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
 
 public class UserLoginSteps {
 
@@ -42,7 +44,7 @@ public class UserLoginSteps {
         userLoginPage.clickSubmitButton();
     }
 
-    @Then("User should be redirected to the User Home / Attendance page")
+    @Then("User should be redirected to the User Home Attendance page")
     public void userShouldBeRedirectedToTheUserHomeAttendancePage() {
         ensurePagesInitialized();
         try {
@@ -102,7 +104,7 @@ public class UserLoginSteps {
         DriverFactory.getDriver().navigate().back();
     }
 
-    @Then("User should remain on the User Home / Attendance page")
+    @Then("User should remain on the User Home Attendance page")
     public void userShouldRemainOnTheUserHomeAttendancePage() {
         ensurePagesInitialized();
         Assert.assertTrue(userLoginPage.getCurrentUrl().contains("absen"), "User navigated away from attendance page");

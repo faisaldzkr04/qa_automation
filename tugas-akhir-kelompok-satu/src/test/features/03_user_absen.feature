@@ -17,4 +17,4 @@ Feature: User Attendance Camera and Modal
   Scenario: [Negative] User cancels or closes attendance camera modal without taking photo
     When User clicks on "Absen Masuk" button
     And User closes the attendance popup without submitting
-    Then User should remain on the User Home / Attendance page
+    Then User should remain on the User Home Attendance page

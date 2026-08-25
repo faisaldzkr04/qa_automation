@@ -15,7 +15,7 @@ public class ConfigReader {
             if (input != null) {
                 properties.load(input);
             } else {
-                FileInputStream fileInput = new FileInputStream("src/test/resources/config.properties");
+                FileInputStream fileInput = new FileInputStream("src/test/config.properties");
                 properties.load(fileInput);
             }
         } catch (IOException e) {
