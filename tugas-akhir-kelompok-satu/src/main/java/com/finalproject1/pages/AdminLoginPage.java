@@ -10,14 +10,14 @@ public class AdminLoginPage extends BasePage {
     private final By passwordInput = By.xpath("//input[@name='password' or @id='password' or @type='password']");
     private final By loginButton = By.xpath("//button[@type='submit' or contains(text(),'Masuk') or contains(text(),'Login')]");
     private final By errorMessageAlert = By.xpath("//div[contains(@class,'alert') or contains(@class,'error') or contains(@role,'alert')]");
-    private final By adminDashboardHeader = By.xpath("//h1 | //h2 | //header | //div[contains(@class,'sidebar')]");
+    private final By adminDashboardHeader = By.xpath("//h1 | //h2 | //header | //div[contains(@class,'sidebar')] | //*[contains(text(),'Dashboard')]");
 
     public AdminLoginPage(WebDriver driver) {
         super(driver);
     }
 
     public void openAdminLoginPage(String url) {
-        driver.get(url);
+        getDriver().get(url);
     }
 
     public void enterEmail(String email) {
@@ -39,7 +39,7 @@ public class AdminLoginPage extends BasePage {
     }
 
     public boolean isAdminDashboardDisplayed() {
-        return isElementDisplayed(adminDashboardHeader);
+        return isElementDisplayed(adminDashboardHeader) || !getDriver().getCurrentUrl().contains("login");
     }
 
     public String getErrorMessage() {

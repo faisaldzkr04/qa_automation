@@ -16,7 +16,7 @@ public class UserLoginPage extends BasePage {
     }
 
     public void openUserLoginPage(String url) {
-        driver.get(url);
+        getDriver().get(url);
     }
 
     public void enterUserEmail(String email) {

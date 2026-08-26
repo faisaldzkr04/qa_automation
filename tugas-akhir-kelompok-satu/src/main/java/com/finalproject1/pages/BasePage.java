@@ -1,6 +1,7 @@
 package com.finalproject1.pages;
 
 import com.finalproject1.utils.ConfigReader;
+import com.finalproject1.utils.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,20 +11,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public abstract class BasePage {
-    protected final WebDriver driver;
-    protected final WebDriverWait wait;
+    protected WebDriver driver;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.getTimeout()));
+    }
+
+    protected WebDriver getDriver() {
+        WebDriver activeDriver = DriverFactory.getDriver();
+        return (activeDriver != null) ? activeDriver : this.driver;
+    }
+
+    protected WebDriverWait getWait() {
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(ConfigReader.getTimeout()));
     }
 
     protected WebElement waitForVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     protected WebElement waitForClickable(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+        return getWait().until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     protected void click(By locator) {
@@ -51,10 +59,10 @@ public abstract class BasePage {
     }
 
     public String getPageTitle() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public String getCurrentUrl() {
-        return driver.getCurrentUrl();
+        return getDriver().getCurrentUrl();
     }
 }
