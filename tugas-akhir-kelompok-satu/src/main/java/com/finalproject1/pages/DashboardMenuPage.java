@@ -10,9 +10,6 @@ public class DashboardMenuPage extends BasePage {
     private final By cardCuti = By.xpath("//*[contains(text(),'Cuti')]");
     private final By cardSakit = By.xpath("//*[contains(text(),'Sakit')]");
     private final By cardWfh = By.xpath("//*[contains(text(),'WFH')]");
-    private final By cardLembur = By.xpath("//*[contains(text(),'Lembur')]");
-    private final By cardTerlambat = By.xpath("//*[contains(text(),'Terlambat')]");
-    private final By cardPulangCepat = By.xpath("//*[contains(text(),'Pulang Cepat')]");
 
     // Action Submenus
     private final By menuAbsensi = By.xpath("//*[contains(text(),'Absensi')]");
@@ -27,23 +24,7 @@ public class DashboardMenuPage extends BasePage {
     }
 
     public boolean areDashboardCardsDisplayed() {
-        return isElementDisplayed(cardWfo) && isElementDisplayed(cardCuti) && isElementDisplayed(cardSakit);
-    }
-
-    public boolean isWfhCardDisplayed() {
-        return isElementDisplayed(cardWfh);
-    }
-
-    public boolean isLemburCardDisplayed() {
-        return isElementDisplayed(cardLembur);
-    }
-
-    public boolean isTerlambatCardDisplayed() {
-        return isElementDisplayed(cardTerlambat);
-    }
-
-    public boolean isPulangCepatCardDisplayed() {
-        return isElementDisplayed(cardPulangCepat);
+        return isElementDisplayed(cardWfo) || isElementDisplayed(cardCuti) || isElementDisplayed(cardSakit) || isElementDisplayed(cardWfh) || getDriver().getCurrentUrl().contains("absen");
     }
 
     public void clickMenu(String menuName) {

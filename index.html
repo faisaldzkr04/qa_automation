@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite, 9 failed tests</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Surefire_suite" class="navigator-link">
+              <span class="suite-name border-failed">Surefire suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Surefire_suite" class="navigator-link ">
+                    <span>[unset file name]</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Surefire_suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Surefire_suite" class="navigator-link ">
+                    <span>1 group</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Surefire_suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Surefire_suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Surefire_suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Surefire_suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">26 methods, 9 failed,   17 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Surefire_suite" class="hide-methods failed suite-Surefire_suite"> (hide)</a> <!-- hide-methods failed suite-Surefire_suite -->
+                      <a href="#" panel-name="suite-Surefire_suite" class="show-methods failed suite-Surefire_suite"> (show)</a> <!-- show-methods failed suite-Surefire_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Surefire_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] User cancels or closes attendance camera modal without taking photo&quot;, &quot;User Attendance C...)">runScenario("[Negative] User cancels or closes attendance camera modal without taking photo", "User Attendance C...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Search user by non-existent NIK&quot;, &quot;Admin User Management (Manual Book Section 22)&quot;)">runScenario("[Negative] Search user by non-existent NIK", "Admin User Management (Manual Book Section 22)")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Successful user registration with valid data and mandatory fields&quot;, &quot;User Account Regist...)">runScenario("[Positive] Successful user registration with valid data and mandatory fields", "User Account Regist...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Click Absen Masuk displays camera preview modal&quot;, &quot;User Attendance Camera and Modal&quot;)">runScenario("[Positive] Click Absen Masuk displays camera preview modal", "User Attendance Camera and Modal")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Successful Absen Masuk with Work From Office and valid note&quot;, &quot;Attendance Flow (FSD B. A...)">runScenario("[Positive] Successful Absen Masuk with Work From Office and valid note", "Attendance Flow (FSD B. A...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Cancel Absen Keluar by navigating back to dashboard&quot;, &quot;Attendance Flow (FSD B. Absen Mas...)">runScenario("[Negative] Cancel Absen Keluar by navigating back to dashboard", "Attendance Flow (FSD B. Absen Mas...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Admin submits employee registration with blank mandatory NIK&quot;, &quot;Admin User Management (M...)">runScenario("[Negative] Admin submits employee registration with blank mandatory NIK", "Admin User Management (M...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Search non-existent Divisi master data&quot;, &quot;Admin Master Data Management (Manual Book Sect...)">runScenario("[Negative] Search non-existent Divisi master data", "Admin Master Data Management (Manual Book Sect...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Successful Absen Keluar with exit notes&quot;, &quot;Attendance Flow (FSD B. Absen Masuk &amp; C. Abse...)">runScenario("[Positive] Successful Absen Keluar with exit notes", "Attendance Flow (FSD B. Absen Masuk & C. Abse...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Surefire_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Surefire_suite" class="hide-methods passed suite-Surefire_suite"> (hide)</a> <!-- hide-methods passed suite-Surefire_suite -->
+                      <a href="#" panel-name="suite-Surefire_suite" class="show-methods passed suite-Surefire_suite"> (show)</a> <!-- show-methods passed suite-Surefire_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Surefire_suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Failed admin login with wrong email&quot;, &quot;Admin Authentication&quot;)">runScenario("[Negative] Failed admin login with wrong email", "Admin Authentication")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Verify Dashboard summary cards display (WFO, Cuti, Sakit, WFH)&quot;, &quot;Dashboard Navigation a...)">runScenario("[Positive] Verify Dashboard summary cards display (WFO, Cuti, Sakit, WFH)", "Dashboard Navigation a...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Successful user login with valid credentials&quot;, &quot;User Mobile Mirroring Authentication&quot;)">runScenario("[Positive] Successful user login with valid credentials", "User Mobile Mirroring Authentication")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Attempt to click on non-clickable read-only summary card&quot;, &quot;Dashboard Navigation and Sum...)">runScenario("[Negative] Attempt to click on non-clickable read-only summary card", "Dashboard Navigation and Sum...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Admin registers new employee with complete valid form&quot;, &quot;Admin User Management (Manual B...)">runScenario("[Positive] Admin registers new employee with complete valid form", "Admin User Management (Manual B...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Open Lembur Approval page to view pending requests&quot;, &quot;Admin Laporan and Approvals (Manua...)">runScenario("[Positive] Open Lembur Approval page to view pending requests", "Admin Laporan and Approvals (Manua...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Successful admin login with valid credentials&quot;, &quot;Admin Authentication&quot;)">runScenario("[Positive] Successful admin login with valid credentials", "Admin Authentication")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Failed user registration with invalid email format (no @ symbol)&quot;, &quot;User Account Registr...)">runScenario("[Negative] Failed user registration with invalid email format (no @ symbol)", "User Account Registr...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Failed user login with wrong email&quot;, &quot;User Mobile Mirroring Authentication&quot;)">runScenario("[Negative] Failed user login with wrong email", "User Mobile Mirroring Authentication")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Failed Absen Masuk without selecting attendance type (Mandatory field empty)&quot;, &quot;Attendan...)">runScenario("[Negative] Failed Absen Masuk without selecting attendance type (Mandatory field empty)", "Attendan...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Add Divisi master data with blank name&quot;, &quot;Admin Master Data Management (Manual Book Sect...)">runScenario("[Negative] Add Divisi master data with blank name", "Admin Master Data Management (Manual Book Sect...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Filter Kehadiran Report with non-existent employee name&quot;, &quot;Admin Laporan and Approvals (...)">runScenario("[Negative] Filter Kehadiran Report with non-existent employee name", "Admin Laporan and Approvals (...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Search existing Divisi master data&quot;, &quot;Admin Master Data Management (Manual Book Section ...)">runScenario("[Positive] Search existing Divisi master data", "Admin Master Data Management (Manual Book Section ...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Negative] Reset report filter returns data table to default state&quot;, &quot;Admin Laporan and Approvals (...)">runScenario("[Negative] Reset report filter returns data table to default state", "Admin Laporan and Approvals (...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Filter and view Kehadiran Report with valid date range&quot;, &quot;Admin Laporan and Approvals (M...)">runScenario("[Positive] Filter and view Kehadiran Report with valid date range", "Admin Laporan and Approvals (M...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Search and filter user by existing name&quot;, &quot;Admin User Management (Manual Book Section 22...)">runScenario("[Positive] Search and filter user by existing name", "Admin User Management (Manual Book Section 22...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.finalproject1.runners.TestRunner" class="method navigator-link" hash-for-method="runScenario(&quot;[Positive] Add new Divisi master data&quot;, &quot;Admin Master Data Management (Manual Book Section 22.D - 2...)">runScenario("[Positive] Add new Divisi master data", "Admin Master Data Management (Manual Book Section 22.D - 2...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Surefire_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Surefire_suite" class="panel Surefire_suite">
+          <div class="suite-Surefire_suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.finalproject1.runners.TestRunner</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] User cancels or closes attendance camera modal without taking photo&quot;, &quot;User Attendance C...)">
+                  </a> <!-- runScenario("[Negative] User cancels or closes attendance camera modal without taking photo", "User Attendance C...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] User cancels or closes attendance camera modal without taking photo","User Attendance Camera and Modal")</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //button[contains(text(),&apos;Close&apos;) or contains(text(),&apos;Tutup&apos;) or contains(.,&apos;×&apos;)] | //div[contains(@class,&apos;MuiButtonBase-root&apos;) or contains(@class,&apos;modal-close&apos;)] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.20.0&apos;, revision: &apos;866c76ca80&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.11&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 151.0.7922.172, chrome: {chromedriverVersion: 151.0.7922.138 (41fa8244239..., userDataDir: C:\Users\EKANAR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:65513}, goog:processID: 28300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:65513/devtoo..., se:cdpVersion: 151.0.7922.172, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a37c440fe5531afafedee8783ba32980
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.finalproject1.pages.BasePage.waitForClickable(BasePage.java:26)
+	at com.finalproject1.pages.BasePage.click(BasePage.java:30)
+	at com.finalproject1.pages.UserDashboardPage.clickCloseCameraModal(UserDashboardPage.java:40)
+	at com.finalproject1.stepdefinitions.UserLoginSteps.userClosesTheAttendancePopupWithoutSubmitting(UserLoginSteps.java:105)
+	at ✽.User closes the attendance popup without submitting(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/03_user_absen.feature:19)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Search user by non-existent NIK&quot;, &quot;Admin User Management (Manual Book Section 22)&quot;)">
+                  </a> <!-- runScenario("[Negative] Search user by non-existent NIK", "Admin User Management (Manual Book Section 22)") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Search user by non-existent NIK","Admin User Management (Manual Book Section 22)")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Expected empty table but found records expected [true] but found [false]
+	at com.finalproject1.stepdefinitions.AdminManagementSteps.userTableShouldDisplayNoRecordsOrEmptyState(AdminManagementSteps.java:43)
+	at ✽.User table should display no records or empty state(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/08_admin_management_user.feature:20)
+... Removed 3 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Successful user registration with valid data and mandatory fields&quot;, &quot;User Account Regist...)">
+                  </a> <!-- runScenario("[Positive] Successful user registration with valid data and mandatory fields", "User Account Regist...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Successful user registration with valid data and mandatory fields","User Account Registration (FSD A. Tampilan Registrasi Akun)")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Registration did not show success or redirect! expected [true] but found [false]
+	at com.finalproject1.stepdefinitions.RegistrationSteps.aSuccessNotificationOrRedirectionShouldOccur(RegistrationSteps.java:48)
+	at ✽.A success notification or redirection should occur(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/05_user_registration.feature:14)
+... Removed 3 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Click Absen Masuk displays camera preview modal&quot;, &quot;User Attendance Camera and Modal&quot;)">
+                  </a> <!-- runScenario("[Positive] Click Absen Masuk displays camera preview modal", "User Attendance Camera and Modal") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Click Absen Masuk displays camera preview modal","User Attendance Camera and Modal")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Attendance modal is not displayed! expected [true] but found [false]
+	at com.finalproject1.stepdefinitions.UserLoginSteps.theAttendanceConfirmationOrSelfieCapturePopupShouldAppear(UserLoginSteps.java:92)
+	at ✽.The attendance confirmation or selfie capture popup should appear(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/03_user_absen.feature:13)
+... Removed 3 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Successful Absen Masuk with Work From Office and valid note&quot;, &quot;Attendance Flow (FSD B. A...)">
+                  </a> <!-- runScenario("[Positive] Successful Absen Masuk with Work From Office and valid note", "Attendance Flow (FSD B. A...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Successful Absen Masuk with Work From Office and valid note","Attendance Flow (FSD B. Absen Masuk & C. Absen Keluar)")</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //select[@name=&apos;tipe_absen&apos; or @id=&apos;tipe_absen&apos;] | //div[contains(@class,&apos;MuiSelect&apos;)] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.20.0&apos;, revision: &apos;866c76ca80&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.11&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 151.0.7922.172, chrome: {chromedriverVersion: 151.0.7922.138 (41fa8244239..., userDataDir: C:\Users\EKANAR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58876}, goog:processID: 37068, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58876/devtoo..., se:cdpVersion: 151.0.7922.172, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d2e7e5a67b0f76373d666a00bf538907
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.finalproject1.pages.BasePage.waitForClickable(BasePage.java:26)
+	at com.finalproject1.pages.BasePage.click(BasePage.java:30)
+	at com.finalproject1.pages.AttendancePage.selectTipeAbsen(AttendancePage.java:40)
+	at com.finalproject1.stepdefinitions.AttendanceSteps.userSelectsAttendanceType(AttendanceSteps.java:33)
+	at ✽.User selects attendance type &quot;Work From Office&quot;(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/06_absen_masuk_keluar.feature:13)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Cancel Absen Keluar by navigating back to dashboard&quot;, &quot;Attendance Flow (FSD B. Absen Mas...)">
+                  </a> <!-- runScenario("[Negative] Cancel Absen Keluar by navigating back to dashboard", "Attendance Flow (FSD B. Absen Mas...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Cancel Absen Keluar by navigating back to dashboard","Attendance Flow (FSD B. Absen Masuk & C. Absen Keluar)")</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //button[contains(text(),&apos;Pulang&apos;) or contains(.,&apos;Absen Pulang&apos;)] | //div[contains(text(),&apos;Pulang&apos;)] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.20.0&apos;, revision: &apos;866c76ca80&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.11&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 151.0.7922.172, chrome: {chromedriverVersion: 151.0.7922.138 (41fa8244239..., userDataDir: C:\Users\EKANAR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52167}, goog:processID: 36716, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52167/devtoo..., se:cdpVersion: 151.0.7922.172, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 68255945616f9f41ac225beccaa02cde
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.finalproject1.pages.BasePage.waitForClickable(BasePage.java:26)
+	at com.finalproject1.pages.BasePage.click(BasePage.java:30)
+	at com.finalproject1.pages.UserDashboardPage.clickAbsenPulang(UserDashboardPage.java:32)
+	at com.finalproject1.stepdefinitions.AttendanceSteps.userIsOnAbsenKeluarScreen(AttendanceSteps.java:73)
+	at ✽.User is on Absen Keluar screen(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/06_absen_masuk_keluar.feature:34)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Admin submits employee registration with blank mandatory NIK&quot;, &quot;Admin User Management (M...)">
+                  </a> <!-- runScenario("[Negative] Admin submits employee registration with blank mandatory NIK", "Admin User Management (M...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Admin submits employee registration with blank mandatory NIK","Admin User Management (Manual Book Section 22)")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Form submitted despite missing mandatory field! expected [true] but found [false]
+	at com.finalproject1.stepdefinitions.AdminManagementSteps.formValidationErrorShouldPreventSubmission(AdminManagementSteps.java:78)
+	at ✽.Form validation error should prevent submission(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/08_admin_management_user.feature:34)
+... Removed 3 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Search non-existent Divisi master data&quot;, &quot;Admin Master Data Management (Manual Book Sect...)">
+                  </a> <!-- runScenario("[Negative] Search non-existent Divisi master data", "Admin Master Data Management (Manual Book Sect...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Search non-existent Divisi master data","Admin Master Data Management (Manual Book Section 22.D - 22.J)")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Empty state was not displayed for master search expected [true] but found [false]
+	at com.finalproject1.stepdefinitions.AdminMasterDataSteps.masterDataTableShouldDisplayNoRecordsOrEmptyState(AdminMasterDataSteps.java:46)
+	at ✽.Master data table should display no records or empty state(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/10_admin_master_data.feature:20)
+... Removed 3 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Successful Absen Keluar with exit notes&quot;, &quot;Attendance Flow (FSD B. Absen Masuk &amp; C. Abse...)">
+                  </a> <!-- runScenario("[Positive] Successful Absen Keluar with exit notes", "Attendance Flow (FSD B. Absen Masuk & C. Abse...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Successful Absen Keluar with exit notes","Attendance Flow (FSD B. Absen Masuk & C. Absen Keluar)")</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //button[contains(text(),&apos;Pulang&apos;) or contains(.,&apos;Absen Pulang&apos;)] | //div[contains(text(),&apos;Pulang&apos;)] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.20.0&apos;, revision: &apos;866c76ca80&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.11&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 151.0.7922.172, chrome: {chromedriverVersion: 151.0.7922.138 (41fa8244239..., userDataDir: C:\Users\EKANAR~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54348}, goog:processID: 15648, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54348/devtoo..., se:cdpVersion: 151.0.7922.172, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d9d41e157751e2575af63e2cb710b4fc
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.finalproject1.pages.BasePage.waitForClickable(BasePage.java:26)
+	at com.finalproject1.pages.BasePage.click(BasePage.java:30)
+	at com.finalproject1.pages.UserDashboardPage.clickAbsenPulang(UserDashboardPage.java:32)
+	at com.finalproject1.stepdefinitions.AttendanceSteps.userIsOnAbsenKeluarScreen(AttendanceSteps.java:73)
+	at ✽.User is on Absen Keluar screen(file:///C:/Users/Ekanaradhipa%20D/Documents/Juara%20Coding/automation/team1-juaracoding-finalproject/tugas-akhir-kelompok-satu/src/test/features/06_absen_masuk_keluar.feature:27)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-failed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.finalproject1.runners.TestRunner</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Failed admin login with wrong email&quot;, &quot;Admin Authentication&quot;)">
+                  </a> <!-- runScenario("[Negative] Failed admin login with wrong email", "Admin Authentication") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Failed admin login with wrong email","Admin Authentication")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Verify Dashboard summary cards display (WFO, Cuti, Sakit, WFH)&quot;, &quot;Dashboard Navigation a...)">
+                  </a> <!-- runScenario("[Positive] Verify Dashboard summary cards display (WFO, Cuti, Sakit, WFH)", "Dashboard Navigation a...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Verify Dashboard summary cards display (WFO, Cuti, Sakit, WFH)","Dashboard Navigation and Summary Cards (FSD 2. Dashboard)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Successful user login with valid credentials&quot;, &quot;User Mobile Mirroring Authentication&quot;)">
+                  </a> <!-- runScenario("[Positive] Successful user login with valid credentials", "User Mobile Mirroring Authentication") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Successful user login with valid credentials","User Mobile Mirroring Authentication")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Attempt to click on non-clickable read-only summary card&quot;, &quot;Dashboard Navigation and Sum...)">
+                  </a> <!-- runScenario("[Negative] Attempt to click on non-clickable read-only summary card", "Dashboard Navigation and Sum...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Attempt to click on non-clickable read-only summary card","Dashboard Navigation and Summary Cards (FSD 2. Dashboard)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Admin registers new employee with complete valid form&quot;, &quot;Admin User Management (Manual B...)">
+                  </a> <!-- runScenario("[Positive] Admin registers new employee with complete valid form", "Admin User Management (Manual B...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Admin registers new employee with complete valid form","Admin User Management (Manual Book Section 22)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Open Lembur Approval page to view pending requests&quot;, &quot;Admin Laporan and Approvals (Manua...)">
+                  </a> <!-- runScenario("[Positive] Open Lembur Approval page to view pending requests", "Admin Laporan and Approvals (Manua...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Open Lembur Approval page to view pending requests","Admin Laporan and Approvals (Manual Book Section 4 - 14)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Successful admin login with valid credentials&quot;, &quot;Admin Authentication&quot;)">
+                  </a> <!-- runScenario("[Positive] Successful admin login with valid credentials", "Admin Authentication") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Successful admin login with valid credentials","Admin Authentication")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Failed user registration with invalid email format (no @ symbol)&quot;, &quot;User Account Registr...)">
+                  </a> <!-- runScenario("[Negative] Failed user registration with invalid email format (no @ symbol)", "User Account Registr...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Failed user registration with invalid email format (no @ symbol)","User Account Registration (FSD A. Tampilan Registrasi Akun)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Failed user login with wrong email&quot;, &quot;User Mobile Mirroring Authentication&quot;)">
+                  </a> <!-- runScenario("[Negative] Failed user login with wrong email", "User Mobile Mirroring Authentication") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Failed user login with wrong email","User Mobile Mirroring Authentication")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Failed Absen Masuk without selecting attendance type (Mandatory field empty)&quot;, &quot;Attendan...)">
+                  </a> <!-- runScenario("[Negative] Failed Absen Masuk without selecting attendance type (Mandatory field empty)", "Attendan...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Failed Absen Masuk without selecting attendance type (Mandatory field empty)","Attendance Flow (FSD B. Absen Masuk & C. Absen Keluar)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Add Divisi master data with blank name&quot;, &quot;Admin Master Data Management (Manual Book Sect...)">
+                  </a> <!-- runScenario("[Negative] Add Divisi master data with blank name", "Admin Master Data Management (Manual Book Sect...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Add Divisi master data with blank name","Admin Master Data Management (Manual Book Section 22.D - 22.J)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Filter Kehadiran Report with non-existent employee name&quot;, &quot;Admin Laporan and Approvals (...)">
+                  </a> <!-- runScenario("[Negative] Filter Kehadiran Report with non-existent employee name", "Admin Laporan and Approvals (...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Filter Kehadiran Report with non-existent employee name","Admin Laporan and Approvals (Manual Book Section 4 - 14)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Search existing Divisi master data&quot;, &quot;Admin Master Data Management (Manual Book Section ...)">
+                  </a> <!-- runScenario("[Positive] Search existing Divisi master data", "Admin Master Data Management (Manual Book Section ...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Search existing Divisi master data","Admin Master Data Management (Manual Book Section 22.D - 22.J)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Negative] Reset report filter returns data table to default state&quot;, &quot;Admin Laporan and Approvals (...)">
+                  </a> <!-- runScenario("[Negative] Reset report filter returns data table to default state", "Admin Laporan and Approvals (...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Negative] Reset report filter returns data table to default state","Admin Laporan and Approvals (Manual Book Section 4 - 14)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Filter and view Kehadiran Report with valid date range&quot;, &quot;Admin Laporan and Approvals (M...)">
+                  </a> <!-- runScenario("[Positive] Filter and view Kehadiran Report with valid date range", "Admin Laporan and Approvals (M...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Filter and view Kehadiran Report with valid date range","Admin Laporan and Approvals (Manual Book Section 4 - 14)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Search and filter user by existing name&quot;, &quot;Admin User Management (Manual Book Section 22...)">
+                  </a> <!-- runScenario("[Positive] Search and filter user by existing name", "Admin User Management (Manual Book Section 22...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Search and filter user by existing name","Admin User Management (Manual Book Section 22)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;[Positive] Add new Divisi master data&quot;, &quot;Admin Master Data Management (Manual Book Section 22.D - 2...)">
+                  </a> <!-- runScenario("[Positive] Add new Divisi master data", "Admin Master Data Management (Manual Book Section 22.D - 2...) -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("[Positive] Add new Divisi master data","Admin Master Data Management (Manual Book Section 22.D - 22.J)")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+        </div> <!-- panel Surefire_suite -->
+        <div panel-name="test-xml-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Surefire suite&quot; verbose=&quot;0&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Surefire test&quot; verbose=&quot;0&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.finalproject1.runners.TestRunner&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Surefire test --&gt;
+&lt;/suite&gt; &lt;!-- Surefire suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Surefire test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="test-group">
+              <span class="test-group-name">cucumber</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">runScenario</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Surefire_suite');
+function tableData_Surefire_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(26);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'runScenario')
+data.setCell(0, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(0, 3, 36071);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'runScenario')
+data.setCell(1, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(1, 3, 20424);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'runScenario')
+data.setCell(2, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(2, 3, 20389);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'runScenario')
+data.setCell(3, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(3, 3, 20185);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'runScenario')
+data.setCell(4, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(4, 3, 20140);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'runScenario')
+data.setCell(5, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(5, 3, 20054);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'runScenario')
+data.setCell(6, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(6, 3, 9579);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'runScenario')
+data.setCell(7, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(7, 3, 8609);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'runScenario')
+data.setCell(8, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(8, 3, 8368);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'runScenario')
+data.setCell(9, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(9, 3, 7986);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'runScenario')
+data.setCell(10, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(10, 3, 7735);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'runScenario')
+data.setCell(11, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(11, 3, 7236);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'runScenario')
+data.setCell(12, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(12, 3, 7159);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'runScenario')
+data.setCell(13, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(13, 3, 6785);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'runScenario')
+data.setCell(14, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(14, 3, 6370);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'runScenario')
+data.setCell(15, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(15, 3, 6258);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'runScenario')
+data.setCell(16, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(16, 3, 6023);
+data.setCell(17, 0, 17)
+data.setCell(17, 1, 'runScenario')
+data.setCell(17, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(17, 3, 5981);
+data.setCell(18, 0, 18)
+data.setCell(18, 1, 'runScenario')
+data.setCell(18, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(18, 3, 5748);
+data.setCell(19, 0, 19)
+data.setCell(19, 1, 'runScenario')
+data.setCell(19, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(19, 3, 5402);
+data.setCell(20, 0, 20)
+data.setCell(20, 1, 'runScenario')
+data.setCell(20, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(20, 3, 5252);
+data.setCell(21, 0, 21)
+data.setCell(21, 1, 'runScenario')
+data.setCell(21, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(21, 3, 5052);
+data.setCell(22, 0, 22)
+data.setCell(22, 1, 'runScenario')
+data.setCell(22, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(22, 3, 4969);
+data.setCell(23, 0, 23)
+data.setCell(23, 1, 'runScenario')
+data.setCell(23, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(23, 3, 3791);
+data.setCell(24, 0, 24)
+data.setCell(24, 1, 'runScenario')
+data.setCell(24, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(24, 3, 2839);
+data.setCell(25, 0, 25)
+data.setCell(25, 1, 'runScenario')
+data.setCell(25, 2, 'com.finalproject1.runners.TestRunner')
+data.setCell(25, 3, 2650);
+window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 4 minutes</span>
+              <div id="times-div-Surefire_suite">
+              </div> <!-- times-div-Surefire_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.finalproject1.runners.TestRunner</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setUpClass(org.testng.TestRunner@5687ade6)</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Successful admin login with valid credentials", "Admin Authentication")</span>
+                <span class="method-start">929 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Failed admin login with wrong email", "Admin Authentication")</span>
+                <span class="method-start">8088 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Successful user login with valid credentials", "User Mobile Mirroring Authentication")</span>
+                <span class="method-start">11879 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Failed user login with wrong email", "User Mobile Mirroring Authentication")</span>
+                <span class="method-start">17281 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Positive] Click Absen Masuk displays camera preview modal", "User Attendance Camera and Modal")</span>
+                <span class="method-start">19931 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Negative] User cancels or closes attendance camera modal without taking photo", "User Attendance C...)</span>
+                <span class="method-start">40320 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Positive] Successful user registration with valid data and mandatory fields", "User Account Regist...)</span>
+                <span class="method-start">60505 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Failed user registration with invalid email format (no @ symbol)", "User Account Registr...)</span>
+                <span class="method-start">80929 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Positive] Successful Absen Masuk with Work From Office and valid note", "Attendance Flow (FSD B. A...)</span>
+                <span class="method-start">83768 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Failed Absen Masuk without selecting attendance type (Mandatory field empty)", "Attendan...)</span>
+                <span class="method-start">119839 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Positive] Successful Absen Keluar with exit notes", "Attendance Flow (FSD B. Absen Masuk & C. Abse...)</span>
+                <span class="method-start">125091 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Negative] Cancel Absen Keluar by navigating back to dashboard", "Attendance Flow (FSD B. Absen Mas...)</span>
+                <span class="method-start">145145 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Verify Dashboard summary cards display (WFO, Cuti, Sakit, WFH)", "Dashboard Navigation a...)</span>
+                <span class="method-start">165285 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Attempt to click on non-clickable read-only summary card", "Dashboard Navigation and Sum...)</span>
+                <span class="method-start">170337 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Search and filter user by existing name", "Admin User Management (Manual Book Section 22...)</span>
+                <span class="method-start">175306 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Negative] Search user by non-existent NIK", "Admin User Management (Manual Book Section 22)")</span>
+                <span class="method-start">181054 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Admin registers new employee with complete valid form", "Admin User Management (Manual B...)</span>
+                <span class="method-start">187077 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Negative] Admin submits employee registration with blank mandatory NIK", "Admin User Management (M...)</span>
+                <span class="method-start">196656 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Filter and view Kehadiran Report with valid date range", "Admin Laporan and Approvals (M...)</span>
+                <span class="method-start">205024 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Filter Kehadiran Report with non-existent employee name", "Admin Laporan and Approvals (...)</span>
+                <span class="method-start">213633 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Open Lembur Approval page to view pending requests", "Admin Laporan and Approvals (Manua...)</span>
+                <span class="method-start">220003 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Reset report filter returns data table to default state", "Admin Laporan and Approvals (...)</span>
+                <span class="method-start">226788 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Search existing Divisi master data", "Admin Master Data Management (Manual Book Section ...)</span>
+                <span class="method-start">234523 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("[Negative] Search non-existent Divisi master data", "Admin Master Data Management (Manual Book Sect...)</span>
+                <span class="method-start">241759 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Positive] Add new Divisi master data", "Admin Master Data Management (Manual Book Section 22.D - 2...)</span>
+                <span class="method-start">247740 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("[Negative] Add Divisi master data with blank name", "Admin Master Data Management (Manual Book Sect...)</span>
+                <span class="method-start">255726 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDownClass</span>
+                <span class="method-start">261987 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>
