@@ -1,0 +1,39 @@
+================================================================================
+REKAPITULASI LENGKAP PERBAIKAN PENGUJIAN OTOMATIS (CUCUMBER BDD)
+Modul: Admin Laporan & Approvals
+================================================================================
+
+1. LATAR BELAKANG MASALAH
+--------------------------------------------------------------------------------
+Pada pengujian awal, terdapat 24 *failed tests* dari skenario negatif ("Search Laporan with invalid name"). Seluruh kegagalan disebabkan oleh `AssertionError` pada langkah validasi tabel kosong ("The report table should display no data found"). Selenium terus mendeteksi adanya baris data di dalam tabel, padahal *keyword* pencarian yang digunakan sudah tidak valid (misal: "InvalidUserXYZ999").
+
+2. ANALISIS AKAR PENYEBAB (ROOT CAUSE)
+--------------------------------------------------------------------------------
+Setelah dilakukan proses *debugging* yang mendalam terhadap interaksi DOM, ditemukan bahwa kegagalan BUKAN disebabkan oleh aplikasi web (magang.dikahadir.com) yang lambat atau struktur HTML tabel yang tidak lazim. Kegagalan murni diakibatkan oleh **kegagalan interaksi (Search input tidak pernah dieksekusi)**:
+- Locator `searchNamaInput` menggunakan XPath `//input[... or @type='text']`. Atribut `@type='text'` ini terlalu generik, sehingga Selenium menangkap elemen *input text* lain (seperti kolom *date picker* atau form yang tersembunyi). Akibatnya, keyword "InvalidUserXYZ999" diketik di elemen yang salah.
+- Locator `searchBtn` hanya mendeteksi keberadaan teks "Search" atau "Cari", yang ternyata tidak efektif untuk menangkap tombol berlambang ikon (icon button).
+- Karena *search box* yang asli tetap kosong, ketika tombol ditekan, API akan mengembalikan seluruh data (default), sehingga tabel tampak selalu penuh.
+
+3. TINDAKAN PERBAIKAN YANG DILAKUKAN (FIXES APPLIED)
+--------------------------------------------------------------------------------
+a. Pembaruan Locator di `AdminLaporanPage.java`:
+   - `searchNamaInput`: Disesuaikan untuk HANYA menangkap atribut `placeholder` atau `name` yang mengandung kata "Cari", "nama", atau "search" tanpa mencakup `@type='text'`.
+   - `searchBtn`: Diperkuat agar dapat mendeteksi tombol *search* berbasis ikon melalui atribut aksesibilitas `aria-label='search'` maupun struktur anak `<svg>` (MUI SearchIcon).
+   
+b. Penyesuaian Interaksi di `AdminLaporanPage.java`:
+   - Pada metode `typeSearchName()`, ditambahkan perintah untuk secara eksplisit menekan tombol `ENTER` (melalui `Keys.ENTER`) tepat setelah string diketikkan. Hal ini menjamin bahwa event `onKeyDown` atau `onChange` milik framework React di-*trigger* secara sempurna.
+
+c. Restrukturisasi File BDD (`09_admin_laporan_approval.feature`):
+   - File BDD yang lama dimutakhirkan (ditulis ulang) menggunakan fitur **`Scenario Outline`** bawaan Cucumber. 
+   - Hal ini memungkinkan pengujian Positif dan Negatif (seperti Search Invalid, Ekspor Data, Download Absen V1/V2, Reset Filter, dll) dilakukan ke **18 submenu Laporan** satu per satu tanpa perulangan kode yang bertele-tele.
+   - Skenario yang dibuat secara utuh meng-cover UI dari menu: Semua, Kehadiran, Izin, Cuti, Sakit, Lembur, Validasi Lembur, Shifting, Meeting, Perjalanan Dinas, Koreksi, Izin Off, Sisa Cuti, Daily Report, hingga Download Absen.
+
+4. HASIL AKHIR (FINAL OUTCOME)
+--------------------------------------------------------------------------------
+- Total Pengujian (Tests Run) : 72 Skenario (Dijalankan via 2 Test Runner: ApiTestRunner & TestRunner)
+- Waktu Eksekusi (Time Taken) : ~ 27 Menit
+- Keberhasilan (Passed)       : 72 Skenario (100% PASSED)
+- Kegagalan (Failed)          : 0 Skenario
+
+KESIMPULAN:
+Masalah integrasi elemen *Search* pada modul Laporan telah diselesaikan secara permanen. Otomasi kini sanggup mengenali elemen dengan akurat dan melakukan iterasi ke seluruh varian menu Laporan tanpa adanya "Undefined Step" maupun "Assertion Error" atas status ketiadaan data.

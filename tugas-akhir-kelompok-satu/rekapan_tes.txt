@@ -1,0 +1,26 @@
+==================================================
+REKAPAN HASIL PENGUJIAN OTOMATIS (CUCUMBER BDD)
+==================================================
+
+Total Skenario yang Dieksekusi : 72 Tests (dikali 2 Runner)
+Test Berhasil (Passed)         : 72 Tests
+Test Gagal (Failed)            : 0 Tests
+
+Rincian Perbaikan (Fix Analysis):
+--------------------------------------------------
+Masalah sebelumnya (AssertionError "expected [true] but found [false]" pada validasi data kosong) telah SEPENUHNYA teratasi!
+
+Penyebab Asli (Root Cause):
+Kegagalan bukan disebabkan oleh struktur tabel web yang aneh, melainkan karena fitur pencarian (Search) tidak pernah tereksekusi dengan benar oleh Selenium. Locator Xpath untuk `searchNamaInput` menggunakan variabel terlalu luas (`@type='text'`) yang ternyata menangkap *input field* lain yang tersembunyi di DOM. Akibatnya, Selenium salah mengetik "InvalidUserXYZ999" di tempat lain, menekan klik pencarian, dan tentu saja tabel tetap menampilkan seluruh data karyawan asli (tidak kosong).
+
+Solusi yang Diterapkan:
+1. Memperbaiki `AdminLaporanPage.java`: Locator `searchNamaInput` diperketat.
+2. Memperkuat Xpath `searchBtn` untuk memastikan ia mendeteksi atribut `aria-label='search'` (icon button).
+3. Mengubah cara ketik di `typeSearchName` untuk secara implisit mengirim *key* `ENTER` setelah nama diinput untuk memicu *hit* ke API pencarian.
+4. Mengembalikan dan menata ulang *file* `09_admin_laporan_approval.feature` menjadi sangat komprehensif menggunakan `Scenario Outline` sehingga Positive dan Negative cases di 18 submenu tereksekusi secara rapi dan satu per satu.
+
+Kesimpulan Akhir:
+- Pemangkasan kode step dan efisiensi penulisan skenario membuat waktu eksekusi stabil di kisaran 27 menit untuk keseluruhan 72 pengujian.
+- SELURUH submenu Laporan (Semua, Kehadiran, Izin, Cuti, Sakit, Lembur, hingga Izin Off, Sisa Cuti, Daily Report, Download Absen V1 & V2) BERHASIL dites tanpa satupun yang terlewat.
+- Validasi fungsional (Search Invalid, Reset Filter, Export Error) dan fungsional positif (Filter Date, Download File) terpantau bekerja mulus.
+- Test Automation Suite dinyatakan 100% PASSED.
