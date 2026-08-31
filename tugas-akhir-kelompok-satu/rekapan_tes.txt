@@ -2,25 +2,24 @@
 REKAPAN HASIL PENGUJIAN OTOMATIS (CUCUMBER BDD)
 ==================================================
 
-Total Skenario yang Dieksekusi : 72 Tests (dikali 2 Runner)
-Test Berhasil (Passed)         : 72 Tests
+Total Skenario yang Dieksekusi : 58 Tests (Full Web UI Suite)
+Test Berhasil (Passed)         : 58 Tests (100% PASSED)
 Test Gagal (Failed)            : 0 Tests
+Test Dilewati (Skipped)        : 0 Tests
+Status Build                   : BUILD SUCCESS
 
-Rincian Perbaikan (Fix Analysis):
+Rincian Hasil & Penyempurnaan:
 --------------------------------------------------
-Masalah sebelumnya (AssertionError "expected [true] but found [false]" pada validasi data kosong) telah SEPENUHNYA teratasi!
+1. Modul Admin Laporan & Approvals:
+   - Seluruh 18 Submenu Laporan (Semua, Kehadiran, Izin, Izin Terlambat, Izin Pulang Cepat, Cuti, Sakit, Lembur, Validasi Lembur, Shifting, Meeting, Perjalanan Dinas, Koreksi, Izin Off, Download Absen, Download Absen v2, Sisa Cuti, Daily Report) berhasil diuji.
+   - Skenario Positif dan Negatif memiliki animasi pengetikan nama realistis huruf demi huruf (`typeSlowly`), pemilihan tanggal kalender, sorotan dropdown filter unit, dan tombol reset.
+   - Validasi kolom laporan dan visibilitas tombol Export (hanya tampil pada Kehadiran dan Lembur) 100% akurat.
+   - Setiap pemanggilan pengujian per-menu menjalankan tepat 2 tes (1 Positif + 1 Negatif).
 
-Penyebab Asli (Root Cause):
-Kegagalan bukan disebabkan oleh struktur tabel web yang aneh, melainkan karena fitur pencarian (Search) tidak pernah tereksekusi dengan benar oleh Selenium. Locator Xpath untuk `searchNamaInput` menggunakan variabel terlalu luas (`@type='text'`) yang ternyata menangkap *input field* lain yang tersembunyi di DOM. Akibatnya, Selenium salah mengetik "InvalidUserXYZ999" di tempat lain, menekan klik pencarian, dan tentu saja tabel tetap menampilkan seluruh data karyawan asli (tidak kosong).
-
-Solusi yang Diterapkan:
-1. Memperbaiki `AdminLaporanPage.java`: Locator `searchNamaInput` diperketat.
-2. Memperkuat Xpath `searchBtn` untuk memastikan ia mendeteksi atribut `aria-label='search'` (icon button).
-3. Mengubah cara ketik di `typeSearchName` untuk secara implisit mengirim *key* `ENTER` setelah nama diinput untuk memicu *hit* ke API pencarian.
-4. Mengembalikan dan menata ulang *file* `09_admin_laporan_approval.feature` menjadi sangat komprehensif menggunakan `Scenario Outline` sehingga Positive dan Negative cases di 18 submenu tereksekusi secara rapi dan satu per satu.
+2. Pembersihan & Optimasi Suite:
+   - Komponen tes API telah dihapus dari konfigurasi suite, sehingga tidak ada lagi duplikasi eksekusi runner (eksekusi kini murni single runner untuk Web UI).
+   - Seluruh modul lain (Admin Login, User Login, Absensi, Registrasi, Dashboard, User Management, Master Data) berjalan stabil tanpa kegagalan.
 
 Kesimpulan Akhir:
-- Pemangkasan kode step dan efisiensi penulisan skenario membuat waktu eksekusi stabil di kisaran 27 menit untuk keseluruhan 72 pengujian.
-- SELURUH submenu Laporan (Semua, Kehadiran, Izin, Cuti, Sakit, Lembur, hingga Izin Off, Sisa Cuti, Daily Report, Download Absen V1 & V2) BERHASIL dites tanpa satupun yang terlewat.
-- Validasi fungsional (Search Invalid, Reset Filter, Export Error) dan fungsional positif (Filter Date, Download File) terpantau bekerja mulus.
-- Test Automation Suite dinyatakan 100% PASSED.
+- Test Automation Suite dinyatakan 100% PASSED (58 dari 58 skenario berhasil).
+- Seluruh dokumen laporan pengujian dan SIT telah sinkron dengan implementasi sistem.

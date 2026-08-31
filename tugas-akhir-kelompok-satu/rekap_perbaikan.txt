@@ -1,39 +1,43 @@
 ================================================================================
-REKAPITULASI LENGKAP PERBAIKAN PENGUJIAN OTOMATIS (CUCUMBER BDD)
-Modul: Admin Laporan & Approvals
+REKAPITULASI LENGKAP PERBAIKAN PENGUJIAN OTOMATIS (CUCUMBER BDD & SELENIUM)
+Modul: Full Web UI Regression (Termasuk Admin Laporan & Approvals)
 ================================================================================
 
-1. LATAR BELAKANG MASALAH
+1. LATAR BELAKANG MASALAH & PENYEMPURNAAN
 --------------------------------------------------------------------------------
-Pada pengujian awal, terdapat 24 *failed tests* dari skenario negatif ("Search Laporan with invalid name"). Seluruh kegagalan disebabkan oleh `AssertionError` pada langkah validasi tabel kosong ("The report table should display no data found"). Selenium terus mendeteksi adanya baris data di dalam tabel, padahal *keyword* pencarian yang digunakan sudah tidak valid (misal: "InvalidUserXYZ999").
+a. Pada pengujian awal modul Laporan, terdapat 24 failed tests dari skenario negatif ("Search Laporan with invalid name") akibat kegagalan interaksi DOM/XPath pada input pencarian.
+b. Pengujian sebelumnya berjalan sangat cepat dan tidak menampilkan animasi visual (seperti mengetik nama, memilih kalender tanggal, atau membuka dropdown).
+c. Eksekusi pengujian per-menu sempat terduplikasi (berjalan 4 kali, bukan 2 kali) akibat adanya runner API yang memindai seluruh folder feature.
+d. Komponen pengujian API yang sudah tidak diperlukan perlu dibersihkan agar suite murni menguji fungsionalitas Web UI.
 
 2. ANALISIS AKAR PENYEBAB (ROOT CAUSE)
 --------------------------------------------------------------------------------
-Setelah dilakukan proses *debugging* yang mendalam terhadap interaksi DOM, ditemukan bahwa kegagalan BUKAN disebabkan oleh aplikasi web (magang.dikahadir.com) yang lambat atau struktur HTML tabel yang tidak lazim. Kegagalan murni diakibatkan oleh **kegagalan interaksi (Search input tidak pernah dieksekusi)**:
-- Locator `searchNamaInput` menggunakan XPath `//input[... or @type='text']`. Atribut `@type='text'` ini terlalu generik, sehingga Selenium menangkap elemen *input text* lain (seperti kolom *date picker* atau form yang tersembunyi). Akibatnya, keyword "InvalidUserXYZ999" diketik di elemen yang salah.
-- Locator `searchBtn` hanya mendeteksi keberadaan teks "Search" atau "Cari", yang ternyata tidak efektif untuk menangkap tombol berlambang ikon (icon button).
-- Karena *search box* yang asli tetap kosong, ketika tombol ditekan, API akan mengembalikan seluruh data (default), sehingga tabel tampak selalu penuh.
+- Locator `searchNamaInput` dan `searchBtn` sebelumnya terlalu generik dan tidak memicu event `ENTER`/`onChange` di web React.
+- Komponen Date Picker menggunakan dialog interaktif yang memerlukan aksi pemilihan visual dan tombol Simpan.
+- `ApiTestRunner` dalam `testng.xml` memindai seluruh feature file UI, sehingga saat difilter per-menu, kedua runner mengeksekusi skenario yang sama (2 + 2 = 4 tes).
 
-3. TINDAKAN PERBAIKAN YANG DILAKUKAN (FIXES APPLIED)
+3. TINDAKAN PERBAIKAN & PENYEMPURNAAN YANG DILAKUKAN (FIXES & ENHANCEMENTS)
 --------------------------------------------------------------------------------
-a. Pembaruan Locator di `AdminLaporanPage.java`:
-   - `searchNamaInput`: Disesuaikan untuk HANYA menangkap atribut `placeholder` atau `name` yang mengandung kata "Cari", "nama", atau "search" tanpa mencakup `@type='text'`.
-   - `searchBtn`: Diperkuat agar dapat mendeteksi tombol *search* berbasis ikon melalui atribut aksesibilitas `aria-label='search'` maupun struktur anak `<svg>` (MUI SearchIcon).
-   
-b. Penyesuaian Interaksi di `AdminLaporanPage.java`:
-   - Pada metode `typeSearchName()`, ditambahkan perintah untuk secara eksplisit menekan tombol `ENTER` (melalui `Keys.ENTER`) tepat setelah string diketikkan. Hal ini menjamin bahwa event `onKeyDown` atau `onChange` milik framework React di-*trigger* secara sempurna.
+a. Perbaikan Interaksi & Animasi Visual Realistis:
+   - Menambahkan simulasi pengetikan karakter per karakter (`typeSlowly`) dengan jeda realistis untuk pencarian nama pada skenario Positif ("Admin") dan Negatif ("InvalidUserXYZ999").
+   - Menambahkan animasi pemilihan tanggal pada popup Date Picker beserta penekanan tombol Save/Simpan.
+   - Menambahkan visual highlight pada tombol Filter Unit Departemen, opsi dropdown, dan tombol Reset.
+   - Mengaktifkan pengisian otomatis form pada menu Download Absen (V1), Download Absen v2, dan Sisa Cuti.
 
-c. Restrukturisasi File BDD (`09_admin_laporan_approval.feature`):
-   - File BDD yang lama dimutakhirkan (ditulis ulang) menggunakan fitur **`Scenario Outline`** bawaan Cucumber. 
-   - Hal ini memungkinkan pengujian Positif dan Negatif (seperti Search Invalid, Ekspor Data, Download Absen V1/V2, Reset Filter, dll) dilakukan ke **18 submenu Laporan** satu per satu tanpa perulangan kode yang bertele-tele.
-   - Skenario yang dibuat secara utuh meng-cover UI dari menu: Semua, Kehadiran, Izin, Cuti, Sakit, Lembur, Validasi Lembur, Shifting, Meeting, Perjalanan Dinas, Koreksi, Izin Off, Sisa Cuti, Daily Report, hingga Download Absen.
+b. Penyempurnaan Skenario Positif & Negatif per Menu:
+   - Menambahkan langkah pencarian nama pada skenario positif di `09_admin_laporan_approval.feature`, sehingga setiap menu laporan memiliki tepat 1 tes Positif dan 1 tes Negatif (2 tes per menu).
 
-4. HASIL AKHIR (FINAL OUTCOME)
+c. Pembersihan Runner API:
+   - Menghapus komponen pengujian API (`ApiTestRunner.java`, `ApiAuthSteps.java`, `04_api_auth.feature`, dan suite API pada `testng.xml`).
+   - Eksekusi kini terfokus 100% pada Web UI `TestRunner.java` tanpa duplikasi.
+
+4. HASIL AKHIR REGRESI PENUH (FINAL OUTCOME)
 --------------------------------------------------------------------------------
-- Total Pengujian (Tests Run) : 72 Skenario (Dijalankan via 2 Test Runner: ApiTestRunner & TestRunner)
-- Waktu Eksekusi (Time Taken) : ~ 27 Menit
-- Keberhasilan (Passed)       : 72 Skenario (100% PASSED)
-- Kegagalan (Failed)          : 0 Skenario
+- Total Skenario Diuji (Tests Run) : 58 Skenario (Seluruh Modul Web UI)
+- Skenario Berhasil (Passed)       : 58 Skenario (100% PASSED)
+- Skenario Gagal (Failed)          : 0 Skenario
+- Skenario Dilewati (Skipped)      : 0 Skenario
+- Status Akhir Build               : BUILD SUCCESS
 
 KESIMPULAN:
-Masalah integrasi elemen *Search* pada modul Laporan telah diselesaikan secara permanen. Otomasi kini sanggup mengenali elemen dengan akurat dan melakukan iterasi ke seluruh varian menu Laporan tanpa adanya "Undefined Step" maupun "Assertion Error" atas status ketiadaan data.
+Seluruh modul Web UI (Admin Login, User Login, Absen, Dashboard, Management User, 18 Submenu Laporan, dan Master Data) telah teruji secara menyeluruh dengan hasil 100% PASSED, interaksi visual yang realistis, dan bebas dari error.

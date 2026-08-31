@@ -15,7 +15,8 @@ Feature: Admin Laporan and Approvals
   Scenario Outline: [Positive] Validate UI elements and positive search on <menu_name> Report
     Given Admin is on Laporan "<menu_name>" page
     Then Admin should see search input, search button, reset button, filter by unit departemen, start date, and end date
-    When Admin selects start date and end date and clicks Save
+    When Admin inputs search by name "Admin"
+    And Admin selects start date and end date and clicks Save
     Then The report table should display "<expected_column>" column
     And Export button visibility should be "<has_export>"
 

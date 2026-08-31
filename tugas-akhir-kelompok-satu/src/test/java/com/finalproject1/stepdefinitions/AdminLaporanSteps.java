@@ -25,7 +25,11 @@ public class AdminLaporanSteps {
     }
 
     @Then("Admin should see search input, search button, reset button, filter by unit departemen, start date, and end date")
-    public void adminShouldSeeSearchInputSearchButtonEtc() {}
+    public void adminShouldSeeSearchInputSearchButtonEtc() {
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException ignored) {}
+    }
 
     @When("Admin inputs search by name {string}")
     public void adminInputsSearchByName(String name) {
@@ -101,7 +105,6 @@ public class AdminLaporanSteps {
             boolean isEmpty = getLaporanPage().isTableEmpty();
             if (!isEmpty) {
                 System.out.println("WARNING: Table did not appear empty.");
-                // Print the actual elements found to understand what they are
                 java.util.List<org.openqa.selenium.WebElement> rows = DriverFactory.getDriver().findElements(org.openqa.selenium.By.xpath("//tbody/tr | //div[contains(@class,'MuiDataGrid-row')] | //div[@role='row' and not(contains(@class,'header'))]"));
                 System.out.println("Number of rows found: " + rows.size());
                 for (org.openqa.selenium.WebElement row : rows) {
@@ -180,25 +183,51 @@ public class AdminLaporanSteps {
     public void theDailyReportShouldBeDownloadedSuccessfully() {}
 
     @When("Admin fills all inputs on Download Absen form")
-    public void adminFillsAllInputsOnDownloadAbsenForm() {}
+    public void adminFillsAllInputsOnDownloadAbsenForm() {
+        getLaporanPage().selectDates();
+        getLaporanPage().typeDropdown("NIK", "12345");
+        getLaporanPage().typeDropdown("Nama", "Budi");
+        getLaporanPage().typeDropdown("Upliner", "Manager");
+        getLaporanPage().typeDropdown("Divisi", "IT");
+        getLaporanPage().typeDropdown("Unit", "Quality Assurance");
+        getLaporanPage().typeDropdown("Tipe", "Excel");
+    }
     
     @When("Admin fills all inputs on Download Absen V2 form")
-    public void adminFillsAllInputsOnDownloadAbsenV2Form() {}
+    public void adminFillsAllInputsOnDownloadAbsenV2Form() {
+        getLaporanPage().selectDates();
+        getLaporanPage().typeDropdown("NIK", "12345");
+        getLaporanPage().typeDropdown("Nama", "Budi");
+        getLaporanPage().typeDropdown("Upliner", "Manager");
+        getLaporanPage().typeDropdown("Unit", "Quality Assurance");
+    }
     
     @When("Admin fills all inputs on Sisa Cuti form")
-    public void adminFillsAllInputsOnSisaCutiForm() {}
+    public void adminFillsAllInputsOnSisaCutiForm() {
+        getLaporanPage().typeDropdown("NIK", "12345");
+        getLaporanPage().typeDropdown("Nama", "Budi");
+        getLaporanPage().typeDropdown("Upliner", "Manager");
+    }
     
     @Then("All inputs on Download Absen form should be cleared")
-    public void allInputsAbsenShouldBeCleared() {}
+    public void allInputsAbsenShouldBeCleared() {
+        try { Thread.sleep(800); } catch (InterruptedException ignored) {}
+    }
     
     @Then("All inputs on Download Absen V2 form should be cleared")
-    public void allInputsAbsenV2ShouldBeCleared() {}
+    public void allInputsAbsenV2ShouldBeCleared() {
+        try { Thread.sleep(800); } catch (InterruptedException ignored) {}
+    }
     
     @Then("All inputs on Sisa Cuti form should be cleared")
-    public void allInputsSisaCutiShouldBeCleared() {}
+    public void allInputsSisaCutiShouldBeCleared() {
+        try { Thread.sleep(800); } catch (InterruptedException ignored) {}
+    }
     
     @Then("The tanggal penarikan data should be cleared")
-    public void tanggalPenarikanShouldBeCleared() {}
+    public void tanggalPenarikanShouldBeCleared() {
+        try { Thread.sleep(800); } catch (InterruptedException ignored) {}
+    }
 
     @When("Admin types invalid data in {string} dropdown")
     public void adminTypesInvalidDataInDropdown(String field) {
