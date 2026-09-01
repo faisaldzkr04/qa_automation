@@ -5,31 +5,43 @@ Modul: Full Web UI Regression (Termasuk Admin Laporan & Approvals)
 
 1. LATAR BELAKANG MASALAH & PENYEMPURNAAN
 --------------------------------------------------------------------------------
-a. Pada pengujian awal modul Laporan, terdapat 24 failed tests dari skenario negatif ("Search Laporan with invalid name") akibat kegagalan interaksi DOM/XPath pada input pencarian.
-b. Pengujian sebelumnya berjalan sangat cepat dan tidak menampilkan animasi visual (seperti mengetik nama, memilih kalender tanggal, atau membuka dropdown).
-c. Eksekusi pengujian per-menu sempat terduplikasi (berjalan 4 kali, bukan 2 kali) akibat adanya runner API yang memindai seluruh folder feature.
-d. Komponen pengujian API yang sudah tidak diperlukan perlu dibersihkan agar suite murni menguji fungsionalitas Web UI.
+a. Pada pengujian awal modul Laporan, terdapat kegagalan interaksi DOM/XPath pada input pencarian dan seleksi kalender.
+b. Pengujian form Download Absen sempat mengalami masalah di mana seluruh inputan teks masuk ke kolom Date karena locator XPath yang terlalu luas.
+c. Halaman Download Absen v2 sempat mengalami 404 Not Found akibat rute URL yang belum sesuai dengan sistem aplikasi (`/laporan/new-generate`).
+d. Komponen pengujian API yang sudah tidak diperlukan telah dibersihkan agar suite murni menguji fungsionalitas Web UI.
 
 2. ANALISIS AKAR PENYEBAB (ROOT CAUSE)
 --------------------------------------------------------------------------------
-- Locator `searchNamaInput` dan `searchBtn` sebelumnya terlalu generik dan tidak memicu event `ENTER`/`onChange` di web React.
-- Komponen Date Picker menggunakan dialog interaktif yang memerlukan aksi pemilihan visual dan tombol Simpan.
-- `ApiTestRunner` dalam `testng.xml` memindai seluruh feature file UI, sehingga saat difilter per-menu, kedua runner mengeksekusi skenario yang sama (2 + 2 = 4 tes).
+- Locator `typeDropdown` sebelumnya menggunakan selector `//div[contains(.,'field')]/..//input` yang menjangkau parent form dan secara tidak sengaja menargetkan input Date urutan pertama.
+- Komponen Date Picker pada web React memerlukan pengetikan tanggal terformat dengan jeda interaksi agar state internal form terbarui secara sempurna.
+- Halaman Download Absen V2 menggunakan rute khusus `/laporan/new-generate` pada web Hadir Magang.
+- Step definition pada `AdminLaporanSteps.java` sempat memiliki data hardcode terpisah yang perlu disinkronkan dengan Page Object.
 
 3. TINDAKAN PERBAIKAN & PENYEMPURNAAN YANG DILAKUKAN (FIXES & ENHANCEMENTS)
 --------------------------------------------------------------------------------
-a. Perbaikan Interaksi & Animasi Visual Realistis:
-   - Menambahkan simulasi pengetikan karakter per karakter (`typeSlowly`) dengan jeda realistis untuk pencarian nama pada skenario Positif ("Admin") dan Negatif ("InvalidUserXYZ999").
-   - Menambahkan animasi pemilihan tanggal pada popup Date Picker beserta penekanan tombol Save/Simpan.
-   - Menambahkan visual highlight pada tombol Filter Unit Departemen, opsi dropdown, dan tombol Reset.
-   - Mengaktifkan pengisian otomatis form pada menu Download Absen (V1), Download Absen v2, dan Sisa Cuti.
+a. Perbaikan Interaksi Kalender & Tanggal (Date Picker):
+   - Metode `selectDates()` dirombak dengan pengetikan langsung tanggal terformat:
+     * Start Date: `25-08-2026`
+     * End Date  : `03-09-2026`
+   - Pengetikan menggunakan buffer clear (`Ctrl+A` -> `Backspace`), `Keys.TAB`, dan click-away untuk menutup dialog kalender secara mulus.
 
-b. Penyempurnaan Skenario Positif & Negatif per Menu:
-   - Menambahkan langkah pencarian nama pada skenario positif di `09_admin_laporan_approval.feature`, sehingga setiap menu laporan memiliki tepat 1 tes Positif dan 1 tes Negatif (2 tes per menu).
+b. Perbaikan Routing & Validasi Download Absen v2:
+   - Menambahkan mapping URL fallback otomatis ke `https://magang.dikahadir.com/laporan/new-generate`.
+   - Mengaktifkan form Download Absen v2 dengan input tanggal, NIK, Nama User, Upliner, dan Unit.
 
-c. Pembersihan Runner API:
-   - Menghapus komponen pengujian API (`ApiTestRunner.java`, `ApiAuthSteps.java`, `04_api_auth.feature`, dan suite API pada `testng.xml`).
-   - Eksekusi kini terfokus 100% pada Web UI `TestRunner.java` tanpa duplikasi.
+c. Penyelarasan Data Testing Sesuai Form Web Aktual:
+   - Form Download Absen, Download Absen v2, dan Sisa Cuti kini menggunakan data valid:
+     * NIK         : `D12345`
+     * Nama User   : `Test Karyawan`
+     * Upliner     : `Dummy Manager`
+     * Divisi      : `123456`
+     * Unit        : `Juara Coding`
+     * Tipe Report : Dikosongkan sesuai kebutuhan form
+
+d. Pembersihan Kode & Penghilangan Warning (Garis Kuning):
+   - Merapikan struktur XPath pada `typeDropdown` agar selalu tepat sasaran ke input yang bersangkutan.
+   - Menghubungkan seluruh step definition di `AdminLaporanSteps.java` langsung ke method `fill...Form()` pada Page Object.
+   - Menghapus unused variables/fields dan merapikan formatting di `AdminLaporanPage.java`, `09_admin_laporan_approval.feature`, dan `AdminLaporanSteps.java`.
 
 4. HASIL AKHIR REGRESI PENUH (FINAL OUTCOME)
 --------------------------------------------------------------------------------
@@ -40,4 +52,4 @@ c. Pembersihan Runner API:
 - Status Akhir Build               : BUILD SUCCESS
 
 KESIMPULAN:
-Seluruh modul Web UI (Admin Login, User Login, Absen, Dashboard, Management User, 18 Submenu Laporan, dan Master Data) telah teruji secara menyeluruh dengan hasil 100% PASSED, interaksi visual yang realistis, dan bebas dari error.
+Seluruh modul Web UI (Admin Login, User Login, Absen, Dashboard, Management User, 18 Submenu Laporan, dan Master Data) telah teruji secara menyeluruh dengan hasil 100% PASSED, interaksi visual realistis, routing akurat, dan bebas dari error/warning.

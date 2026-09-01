@@ -12,14 +12,16 @@ Rincian Hasil & Penyempurnaan:
 --------------------------------------------------
 1. Modul Admin Laporan & Approvals:
    - Seluruh 18 Submenu Laporan (Semua, Kehadiran, Izin, Izin Terlambat, Izin Pulang Cepat, Cuti, Sakit, Lembur, Validasi Lembur, Shifting, Meeting, Perjalanan Dinas, Koreksi, Izin Off, Download Absen, Download Absen v2, Sisa Cuti, Daily Report) berhasil diuji.
-   - Skenario Positif dan Negatif memiliki animasi pengetikan nama realistis huruf demi huruf (`typeSlowly`), pemilihan tanggal kalender, sorotan dropdown filter unit, dan tombol reset.
+   - Skenario Positif dan Negatif memiliki animasi pengetikan nama realistis (`typeSlowly`), pemilihan rentang tanggal kalender (25-08-2026 s.d. 03-09-2026), interaksi dropdown unit, dan fungsi reset.
+   - Form Download Absen, Download Absen v2, dan Sisa Cuti terisi lengkap dengan data valid (NIK: D12345, Nama: Test Karyawan, Upliner: Dummy Manager, Divisi: 123456, Unit: Juara Coding).
+   - Rute halaman Download Absen v2 terhubung ke `/laporan/new-generate` sehingga bebas dari error 404.
    - Validasi kolom laporan dan visibilitas tombol Export (hanya tampil pada Kehadiran dan Lembur) 100% akurat.
-   - Setiap pemanggilan pengujian per-menu menjalankan tepat 2 tes (1 Positif + 1 Negatif).
 
 2. Pembersihan & Optimasi Suite:
-   - Komponen tes API telah dihapus dari konfigurasi suite, sehingga tidak ada lagi duplikasi eksekusi runner (eksekusi kini murni single runner untuk Web UI).
-   - Seluruh modul lain (Admin Login, User Login, Absensi, Registrasi, Dashboard, User Management, Master Data) berjalan stabil tanpa kegagalan.
+   - Penghapusan seluruh warning dan unused fields pada file page object dan step definitions.
+   - Komponen tes API telah dihapus dari konfigurasi suite, sehingga eksekusi murni single runner untuk Web UI.
+   - Seluruh modul lain (Admin Login, User Login, Absensi, Registrasi, Dashboard, User Management, Master Data) berjalan stabil dan konsisten.
 
 Kesimpulan Akhir:
 - Test Automation Suite dinyatakan 100% PASSED (58 dari 58 skenario berhasil).
-- Seluruh dokumen laporan pengujian dan SIT telah sinkron dengan implementasi sistem.
+- Seluruh dokumen laporan pengujian, file feature, dan SIT telah sinkron dengan implementasi sistem.

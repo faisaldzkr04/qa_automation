@@ -110,7 +110,9 @@ public class AdminLaporanSteps {
                 for (org.openqa.selenium.WebElement row : rows) {
                     try {
                         System.out.println("Row outerHTML: " + row.getAttribute("outerHTML"));
-                    } catch (Exception e) {}
+                    } catch (Exception e) {
+                        System.out.println("Error printing row: " + e.getMessage());
+                    }
                 }
             }
             Assert.assertTrue(isEmpty, "Expected no data found in report table.");
@@ -184,29 +186,17 @@ public class AdminLaporanSteps {
 
     @When("Admin fills all inputs on Download Absen form")
     public void adminFillsAllInputsOnDownloadAbsenForm() {
-        getLaporanPage().selectDates();
-        getLaporanPage().typeDropdown("NIK", "12345");
-        getLaporanPage().typeDropdown("Nama", "Budi");
-        getLaporanPage().typeDropdown("Upliner", "Manager");
-        getLaporanPage().typeDropdown("Divisi", "IT");
-        getLaporanPage().typeDropdown("Unit", "Quality Assurance");
-        getLaporanPage().typeDropdown("Tipe", "Excel");
+        getLaporanPage().fillDownloadAbsenForm();
     }
     
     @When("Admin fills all inputs on Download Absen V2 form")
     public void adminFillsAllInputsOnDownloadAbsenV2Form() {
-        getLaporanPage().selectDates();
-        getLaporanPage().typeDropdown("NIK", "12345");
-        getLaporanPage().typeDropdown("Nama", "Budi");
-        getLaporanPage().typeDropdown("Upliner", "Manager");
-        getLaporanPage().typeDropdown("Unit", "Quality Assurance");
+        getLaporanPage().fillDownloadAbsenV2Form();
     }
     
     @When("Admin fills all inputs on Sisa Cuti form")
     public void adminFillsAllInputsOnSisaCutiForm() {
-        getLaporanPage().typeDropdown("NIK", "12345");
-        getLaporanPage().typeDropdown("Nama", "Budi");
-        getLaporanPage().typeDropdown("Upliner", "Manager");
+        getLaporanPage().fillSisaCutiForm();
     }
     
     @Then("All inputs on Download Absen form should be cleared")

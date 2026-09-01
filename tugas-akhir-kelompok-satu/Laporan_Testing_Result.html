@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Test Report - Modul Laporan (Kelompok 1)</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --pass-color: #10b981;
+            --border-color: #e2e8f0;
+            --primary-color: #1e1b4b;
+            --primary-gradient: linear-gradient(135deg, #1e1b4b, #3b358a);
+            --success-gradient: linear-gradient(135deg, #059669, #10b981);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .header-title {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+        }
+
+        .header-subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* --- STAT CARDS --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-top: 4px solid var(--primary-color);
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .stat-title {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: right;
+            color: var(--primary-color);
+        }
+
+        /* --- CHARTS GRID --- */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .pass-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--pass-color);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .donut-chart {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: conic-gradient(var(--pass-color) 100%, transparent 0);
+            margin: 0 auto 24px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .donut-inner {
+            width: 110px;
+            height: 110px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--pass-color);
+        }
+
+        .chart-footer {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .chart-footer strong {
+            color: var(--text-main);
+        }
+
+        /* --- TEST FLOW SECTION --- */
+        .flow-section {
+            background: var(--card-bg);
+            padding: 28px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .flow-step {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 16px 14px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(30, 27, 75, 0.15);
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .flow-step i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .arrow {
+            font-size: 20px;
+            color: var(--primary-color);
+            opacity: 0.6;
+        }
+
+        .validation-step {
+            background: var(--success-gradient);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.25);
+        }
+
+        /* --- DETAIL TABLE --- */
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .detail-table th {
+            background: #f8fafc;
+            color: var(--text-muted);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .detail-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .badge-pass {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="header-title">Automation Test Report - Modul Admin Laporan</h1>
+            <p class="header-subtitle">Tugas Akhir Kelompok 1 &bull; Framework Selenium Cucumber BDD</p>
+        </div>
+
+        <!-- 4 Stat Cards -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-title">Total Tests (Laporan)</div>
+                <div class="stat-value">36</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Total Steps</div>
+                <div class="stat-value">192</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Pass Rate</div>
+                <div class="stat-value" style="color: var(--pass-color);">100%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Execution Status</div>
+                <div class="stat-value" style="font-size: 20px; color: var(--pass-color); margin-top: 8px;">PASSED</div>
+            </div>
+        </div>
+
+        <!-- 2 Chart Cards -->
+        <div class="charts-grid">
+            <!-- Tests View -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span>Tests View (Scenarios)</span>
+                    <div class="pass-badge"><i class="fa-solid fa-check"></i> 100% Pass</div>
+                </div>
+                <div class="donut-chart">
+                    <div class="donut-inner">36 / 36</div>
+                </div>
+                <div class="chart-footer">
+                    <strong>36</strong> test(s) passed<br>
+                    <strong>0</strong> failed, <strong>0</strong> skipped
+                </div>
+            </div>
+
+            <!-- Steps View -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span>Steps View (BDD Steps)</span>
+                    <div class="pass-badge"><i class="fa-solid fa-check"></i> 100% Pass</div>
+                </div>
+                <div class="donut-chart">
+                    <div class="donut-inner">192 / 192</div>
+                </div>
+                <div class="chart-footer">
+                    <strong>192</strong> step(s) passed<br>
+                    <strong>0</strong> failed, <strong>0</strong> skipped
+                </div>
+            </div>
+        </div>
+
+        <!-- Flowchart Section -->
+        <div class="flow-section">
+            <div class="section-title">
+                <i class="fa-solid fa-diagram-project"></i> Alur Pengujian Otomatis (Automation Test Flow)
+            </div>
+            
+            <div class="flow-container">
+                <div class="flow-step">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    1. Login Admin<br><small style="opacity:0.8;">Auth & Token Setup</small>
+                </div>
+                
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flow-step">
+                    <i class="fa-solid fa-folder-tree"></i>
+                    2. Navigasi Submenu<br><small style="opacity:0.8;">18 Submenu Laporan</small>
+                </div>
+                
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flow-step">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    3. Filter Tanggal & Form<br><small style="opacity:0.8;">25-08-2026 s.d. 03-09-2026</small>
+                </div>
+                
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flow-step">
+                    <i class="fa-solid fa-sliders"></i>
+                    4. Input Dropdown<br><small style="opacity:0.8;">NIK, Nama, Upliner, Unit</small>
+                </div>
+
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flow-step">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    5. Search / Download<br><small style="opacity:0.8;">Trigger Action</small>
+                </div>
+
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <div class="flow-step validation-step">
+                    <i class="fa-solid fa-circle-check"></i>
+                    6. Validasi Output<br><small style="opacity:0.9;">Tabel & File Report</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Submenu Coverage Section -->
+        <div class="flow-section">
+            <div class="section-title">
+                <i class="fa-solid fa-list-check"></i> Cakupan Pengujian Submenu Laporan
+            </div>
+            <table class="detail-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Submenu Laporan</th>
+                        <th>Skenario Positif</th>
+                        <th>Skenario Negatif</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Semua Laporan</td><td>Search Valid & Filter Tanggal</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>2</td><td>Kehadiran</td><td>Filter & Export Report</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>3</td><td>Izin</td><td>Filter & Validasi Kolom Izin</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>4</td><td>Izin Terlambat</td><td>Filter & Validasi Kolom Terlambat</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>5</td><td>Izin Pulang Cepat</td><td>Filter & Validasi Kolom Pulang Cepat</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>6</td><td>Cuti</td><td>Filter & Validasi Kolom Cuti</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>7</td><td>Sakit</td><td>Filter & Validasi Kolom Sakit</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>8</td><td>Lembur</td><td>Filter & Export Lembur</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>9</td><td>Validasi Lembur</td><td>Filter & Validasi Kolom Validasi</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>10</td><td>Shifting</td><td>Filter & Validasi Kolom Shifting</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>11</td><td>Meeting</td><td>Filter & Validasi Kolom Meeting</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>12</td><td>Perjalanan Dinas</td><td>Filter & Validasi Kolom Dinas</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>13</td><td>Koreksi</td><td>Filter & Validasi Kolom Koreksi</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>14</td><td>Izin Off</td><td>Filter & Validasi Kolom Izin Off</td><td>Search Invalid (No Data)</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>15</td><td>Download Absen</td><td>Form Lengkap & Download File</td><td>Reset Form Fields</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>16</td><td>Download Absen v2</td><td>Form New-Generate & Download File</td><td>Reset Form Fields</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>17</td><td>Sisa Cuti</td><td>Form Sisa Cuti & Download File</td><td>Reset Form Fields</td><td><span class="badge-pass">PASSED</span></td></tr>
+                    <tr><td>18</td><td>Daily Report</td><td>Tanggal Penarikan & Download</td><td>Reset Tanggal Penarikan</td><td><span class="badge-pass">PASSED</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>
