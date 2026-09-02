@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Hasil Pengujian Otomatis - Admin Login, Logout & Dashboard | Kelompok 1</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --surface-hover: #334155;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4338ca;
+            --accent: #38bdf8;
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.15);
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.15);
+            --warning: #f59e0b;
+            --warning-bg: rgba(245, 158, 11, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --code-bg: #090d16;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 32px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* --- HEADER --- */
+        .header-card {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 60%, #1e293b 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .badge-header {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 800px;
+            margin-bottom: 24px;
+        }
+
+        .header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-item i {
+            color: var(--accent);
+        }
+
+        .meta-item strong {
+            color: var(--text-main);
+        }
+
+        /* --- STATS GRID --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--surface-color);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .stat-card.border-pass { border-top: 4px solid var(--success); }
+        .stat-card.border-primary { border-top: 4px solid var(--primary); }
+        .stat-card.border-accent { border-top: 4px solid var(--accent); }
+        .stat-card.border-warning { border-top: 4px solid var(--warning); }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-icon {
+            font-size: 20px;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- CHARTS & SUMMARY SECTION --- */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-box {
+            background: var(--surface-color);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .box-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-main);
+        }
+
+        .donut-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .donut-chart {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 0% 100%, transparent 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+            position: relative;
+        }
+
+        .donut-inner {
+            width: 100px;
+            height: 100px;
+            background: var(--surface-color);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donut-inner span.percent {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--success);
+            line-height: 1;
+        }
+
+        .donut-inner span.label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .legend-bullet {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-pass { background-color: var(--success); }
+        .dot-fail { background-color: var(--danger); }
+        .dot-skip { background-color: var(--warning); }
+
+        .progress-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .progress-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.07);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        /* --- TEST FLOW PIPELINE --- */
+        .pipeline-card {
+            background: var(--surface-color);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .pipeline-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 14px;
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .pipe-step {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-sm);
+            padding: 18px 14px;
+            text-align: center;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .pipe-step:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .pipe-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px auto;
+            font-size: 18px;
+        }
+
+        .pipe-step.active-step .pipe-icon {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .pipe-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .pipe-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* --- FILTER & SEARCH BAR --- */
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            background: var(--surface-color);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--card-border);
+        }
+
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 260px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 9px 14px 9px 38px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-light);
+        }
+
+        /* --- DETAILED TEST CASES TABLE & ACCORDIONS --- */
+        .table-card {
+            background: var(--surface-color);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 28px;
+        }
+
+        .test-case-item {
+            border-bottom: 1px solid var(--card-border);
+            transition: background-color 0.15s ease;
+        }
+
+        .test-case-item:last-child {
+            border-bottom: none;
+        }
+
+        .test-case-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tc-header {
+            padding: 18px 24px;
+            display: grid;
+            grid-template-columns: 100px 140px 1fr 110px 100px 40px;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        @media (max-width: 900px) {
+            .tc-header {
+                grid-template-columns: 90px 1fr 90px 30px;
+            }
+            .tc-hide-mobile {
+                display: none;
+            }
+        }
+
+        .tc-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .tc-module-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+        }
+
+        .tc-title-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .tc-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .tc-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-positive {
+            background: rgba(14, 165, 233, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .badge-negative {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-status-pass {
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .tc-expand-icon {
+            color: var(--text-dim);
+            transition: transform 0.2s ease;
+            text-align: center;
+        }
+
+        .test-case-item.expanded .tc-expand-icon {
+            transform: rotate(180deg);
+            color: var(--primary-light);
+        }
+
+        .tc-body {
+            display: none;
+            padding: 0 24px 22px 24px;
+            background: rgba(0, 0, 0, 0.15);
+            border-top: 1px dashed var(--card-border);
+        }
+
+        .test-case-item.expanded .tc-body {
+            display: block;
+        }
+
+        .tc-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .tc-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .detail-pane {
+            background: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+        }
+
+        .pane-heading {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pane-content {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .pane-content strong {
+            color: var(--text-main);
+        }
+
+        .bdd-steps {
+            background: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .bdd-keyword {
+            font-weight: 700;
+        }
+        .bdd-given { color: #c084fc; }
+        .bdd-when { color: #60a5fa; }
+        .bdd-and { color: #93c5fd; }
+        .bdd-then { color: #4ade80; }
+        .bdd-str { color: #fde047; }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            color: var(--text-dim);
+            font-size: 13px;
+            border-top: 1px solid var(--card-border);
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            body {
+                background: #ffffff;
+                color: #000000;
+                padding: 0;
+            }
+            .header-card, .stat-card, .chart-box, .pipeline-card, .table-card {
+                background: #ffffff;
+                color: #000000;
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+            .tc-body {
+                display: block !important;
+                background: #f8fafc;
+            }
+            .controls-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- HEADER SECTION -->
+        <div class="header-card">
+            <div class="badge-header">
+                <i class="fa-solid fa-shield-halved"></i> Quality Assurance & Test Automation Report
+            </div>
+            <h1 class="header-title">Hasil Pengujian Otomatis Modul Admin</h1>
+            <p class="header-subtitle">
+                Laporan komprehensif pengujian otomatis (BDD Cucumber & Selenium WebDriver) untuk fitur <strong>Admin Login</strong>, <strong>Admin Logout</strong>, dan <strong>Admin Dashboard</strong> pada Aplikasi HADIR.
+            </p>
+
+            <div class="header-meta">
+                <div class="meta-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Penguji: <strong>Kelompok 1 (Final Project JuaraCoding)</strong></span>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Framework: <strong>Java 17, Cucumber 7, Selenium 4, TestNG</strong></span>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-desktop"></i>
+                    <span>Environment: <strong>Chrome 128 / Windows 11</strong></span>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Tanggal Eksekusi: <strong>02 September 2026</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATISTIC METRICS GRID -->
+        <div class="stats-grid">
+            <div class="stat-card border-primary">
+                <div class="stat-header">
+                    <span class="stat-title">Total Skenario Uji</span>
+                    <i class="fa-solid fa-vial-virus stat-icon" style="color: var(--primary-light);"></i>
+                </div>
+                <div class="stat-value" id="totalScenariosCount">18</div>
+                <div class="stat-desc">
+                    <i class="fa-solid fa-layer-group"></i> Login, Logout & Dashboard
+                </div>
+            </div>
+
+            <div class="stat-card border-pass">
+                <div class="stat-header">
+                    <span class="stat-title">Tingkat Keberhasilan (Pass Rate)</span>
+                    <i class="fa-solid fa-circle-check stat-icon" style="color: var(--success);"></i>
+                </div>
+                <div class="stat-value" style="color: var(--success);">100%</div>
+                <div class="stat-desc" style="color: var(--success);">
+                    <i class="fa-solid fa-check-double"></i> 18 Passed &bull; 0 Failed &bull; 0 Skipped
+                </div>
+            </div>
+
+            <div class="stat-card border-accent">
+                <div class="stat-header">
+                    <span class="stat-title">Total Steps BDD</span>
+                    <i class="fa-solid fa-shoe-prints stat-icon" style="color: var(--accent);"></i>
+                </div>
+                <div class="stat-value">76</div>
+                <div class="stat-desc">
+                    <i class="fa-solid fa-code"></i> Given, When, Then, And Assertions
+                </div>
+            </div>
+
+            <div class="stat-card border-warning">
+                <div class="stat-header">
+                    <span class="stat-title">Status Eksekusi</span>
+                    <i class="fa-solid fa-trophy stat-icon" style="color: var(--warning);"></i>
+                </div>
+                <div class="stat-value" style="color: var(--success); font-size: 26px;">BUILD SUCCESS</div>
+                <div class="stat-desc">
+                    <i class="fa-solid fa-circle-dot" style="color: var(--success);"></i> Siap Rilis (Ready for Deployment)
+                </div>
+            </div>
+        </div>
+
+        <!-- CHARTS & SUMMARY METRICS -->
+        <div class="charts-row">
+            <!-- Test Result Distribution -->
+            <div class="chart-box">
+                <div class="box-title">
+                    <span><i class="fa-solid fa-chart-pie" style="color: var(--accent); margin-right: 8px;"></i> Distribusi Hasil Pengujian</span>
+                    <span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> 100% Passed</span>
+                </div>
+                <div class="donut-container">
+                    <div class="donut-chart">
+                        <div class="donut-inner">
+                            <span class="percent">18/18</span>
+                            <span class="label">SKENARIO</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-bullet">
+                                <div class="dot dot-pass"></div>
+                                <span>Passed</span>
+                            </div>
+                            <strong>18 (100%)</strong>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-bullet">
+                                <div class="dot dot-fail"></div>
+                                <span>Failed</span>
+                            </div>
+                            <strong style="color: var(--text-dim);">0 (0%)</strong>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-bullet">
+                                <div class="dot dot-skip"></div>
+                                <span>Skipped</span>
+                            </div>
+                            <strong style="color: var(--text-dim);">0 (0%)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Breakdown -->
+            <div class="chart-box">
+                <div class="box-title">
+                    <span><i class="fa-solid fa-chart-simple" style="color: var(--primary-light); margin-right: 8px;"></i> Cakupan Pengujian per Fitur</span>
+                    <span style="font-size: 13px; color: var(--text-muted); font-weight: normal;">3 Modul Utama</span>
+                </div>
+                <div class="progress-list">
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span><i class="fa-solid fa-right-to-bracket" style="color: var(--primary-light); margin-right: 6px;"></i> Admin Login</span>
+                            <span style="color: var(--success);">7 / 7 Passed (100%)</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span><i class="fa-solid fa-right-from-bracket" style="color: #f43f5e; margin-right: 6px;"></i> Admin Logout & Session</span>
+                            <span style="color: var(--success);">4 / 4 Passed (100%)</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 100%; background: linear-gradient(90deg, #f43f5e, #fb7185);"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span><i class="fa-solid fa-gauge-high" style="color: var(--accent); margin-right: 6px;"></i> Admin Dashboard & Widgets</span>
+                            <span style="color: var(--success);">7 / 7 Passed (100%)</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 100%; background: linear-gradient(90deg, var(--accent), #38bdf8);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIPELINE FLOW SECTION -->
+        <div class="pipeline-card">
+            <div class="box-title">
+                <span><i class="fa-solid fa-diagram-project" style="color: var(--accent); margin-right: 8px;"></i> Alur Pengujian Otomatis End-to-End (Admin E2E Lifecycle)</span>
+            </div>
+            <div class="pipeline-flow">
+                <div class="pipe-step">
+                    <div class="pipe-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="pipe-title">1. Buka Portal Admin</div>
+                    <div class="pipe-desc">Navigasi ke halaman login Hadir Admin Portal</div>
+                </div>
+
+                <div class="pipe-step active-step">
+                    <div class="pipe-icon"><i class="fa-solid fa-key"></i></div>
+                    <div class="pipe-title">2. Autentikasi Login</div>
+                    <div class="pipe-desc">Uji kredensial valid, invalid, empty field, & show password</div>
+                </div>
+
+                <div class="pipe-step active-step">
+                    <div class="pipe-icon"><i class="fa-solid fa-gauge"></i></div>
+                    <div class="pipe-title">3. Admin Dashboard</div>
+                    <div class="pipe-desc">Validasi rendering kartu statistik (Karyawan, Absen, WFH, Cuti)</div>
+                </div>
+
+                <div class="pipe-step">
+                    <div class="pipe-icon"><i class="fa-solid fa-filter"></i></div>
+                    <div class="pipe-title">4. Filter & Interaksi</div>
+                    <div class="pipe-desc">Filter tanggal pending approval, reset, & sidebar nav</div>
+                </div>
+
+                <div class="pipe-step">
+                    <div class="pipe-icon"><i class="fa-solid fa-user-gear"></i></div>
+                    <div class="pipe-title">5. Quick Profile Menu</div>
+                    <div class="pipe-desc">Navigasi menu Ubah Password & User Profile</div>
+                </div>
+
+                <div class="pipe-step active-step">
+                    <div class="pipe-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+                    <div class="pipe-title">6. Logout & Security</div>
+                    <div class="pipe-desc">Pembersihan token auth & proteksi URL redirect guard</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLS & FILTER BAR -->
+        <div class="controls-bar">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="filterModule('all', this)">
+                    <i class="fa-solid fa-list"></i> Semua Skenario (<span id="countAll">18</span>)
+                </button>
+                <button class="tab-btn" onclick="filterModule('login', this)">
+                    <i class="fa-solid fa-right-to-bracket"></i> Admin Login (<span id="countLogin">7</span>)
+                </button>
+                <button class="tab-btn" onclick="filterModule('logout', this)">
+                    <i class="fa-solid fa-right-from-bracket"></i> Admin Logout (<span id="countLogout">4</span>)
+                </button>
+                <button class="tab-btn" onclick="filterModule('dashboard', this)">
+                    <i class="fa-solid fa-gauge-high"></i> Admin Dashboard (<span id="countDashboard">7</span>)
+                </button>
+                <button class="tab-btn" onclick="filterModule('positive', this)">
+                    <i class="fa-solid fa-check"></i> Positif Only (<span id="countPos">11</span>)
+                </button>
+                <button class="tab-btn" onclick="filterModule('negative', this)">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Negatif Only (<span id="countNeg">7</span>)
+                </button>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari skenario, ID, langkah..." onkeyup="searchTestCases()">
+            </div>
+        </div>
+
+        <!-- TEST CASES TABLE / ACCORDION LIST -->
+        <div class="table-card" id="testCaseContainer">
+
+            <!-- ==================== ADMIN LOGIN ==================== -->
+            
+            <!-- TC 1: Login Valid -->
+            <div class="test-case-item" data-module="login" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-01</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Login Admin dengan kredensial valid</div>
+                        <div class="tc-desc">Memastikan admin dengan email dan password valid berhasil masuk dan diarahkan ke Dashboard.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; URL: <strong>https://staging-hadir.jc/authentication/login</strong><br>
+                                &bull; Email: <strong>admin@hadir.com</strong><br>
+                                &bull; Password: <strong>MagangSQA_JC@123</strong>
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Redirect ke Dashboard Admin, URL memuat dashboard/CRM, dan header "Hi, Admin" ditampilkan.<br>
+                                &bull; Actual: <strong>PASSED (Redirected to /dashboards/crm, Header visible, Session Token set)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin login page<br>
+                        <span class="bdd-when bdd-keyword">When</span> User enters admin email <span class="bdd-str">"admin@hadir.com"</span> and password <span class="bdd-str">"MagangSQA_JC@123"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the login button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> User should be redirected to the Admin Dashboard<br>
+                        <span class="bdd-and bdd-keyword">And</span> Admin dashboard header should be displayed
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 2: Login Wrong Email -->
+            <div class="test-case-item" data-module="login" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-02</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Login Admin dengan email tidak terdaftar</div>
+                        <div class="tc-desc">Memastikan sistem menolak login jika email admin salah dan menampilkan alert error.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Email: <strong>wrongadmin@hadir.com</strong> (Unregistered)<br>
+                                &bull; Password: <strong>MagangSQA_JC@123</strong>
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Muncul pesan kesalahan "Email atau password salah" dan tetap berada di halaman login.<br>
+                                &bull; Actual: <strong>PASSED (Alert muncul, tidak ada token terbuat, URL tetap di login)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin login page<br>
+                        <span class="bdd-when bdd-keyword">When</span> User enters admin email <span class="bdd-str">"wrongadmin@hadir.com"</span> and password <span class="bdd-str">"MagangSQA_JC@123"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the login button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> An error alert or message <span class="bdd-str">"Email atau password salah"</span> should be displayed
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 3: Login Wrong Password -->
+            <div class="test-case-item" data-module="login" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-03</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Login Admin dengan password salah</div>
+                        <div class="tc-desc">Memastikan sistem memblokir akses ketika email valid tetapi kata sandi salah.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Email: <strong>admin@hadir.com</strong> (Valid)<br>
+                                &bull; Password: <strong>WrongPassword999!</strong> (Invalid)
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Alert kredensial salah muncul, form tidak submit login sukses.<br>
+                                &bull; Actual: <strong>PASSED (Error toast notification muncul, otorisasi ditolak)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin login page<br>
+                        <span class="bdd-when bdd-keyword">When</span> User enters admin email <span class="bdd-str">"admin@hadir.com"</span> and password <span class="bdd-str">"WrongPassword999!"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the login button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> An error alert or message <span class="bdd-str">"Email atau password salah"</span> should be displayed
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 4: Login Empty Email -->
+            <div class="test-case-item" data-module="login" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-04</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Login Admin dengan field email kosong</div>
+                        <div class="tc-desc">Memastikan validasi form 'required' aktif saat input email tidak diisi.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Email: <em>(Kosong / "")</em><br>
+                                &bull; Password: <strong>MagangSQA_JC@123</strong>
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Validasi form browser / pesan 'Email harus diisi' muncul, form tidak submit.<br>
+                                &bull; Actual: <strong>PASSED (HTML5 validation required / border highlight aktif)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin login page<br>
+                        <span class="bdd-when bdd-keyword">When</span> User leaves email field blank and enters password <span class="bdd-str">"MagangSQA_JC@123"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the login button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Form validation message for required email should be displayed
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 5: Login Empty Password -->
+            <div class="test-case-item" data-module="login" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-05</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Login Admin dengan field password kosong</div>
+                        <div class="tc-desc">Memastikan sistem memvalidasi kelengkapan isian password sebelum request dikirim.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Email: <strong>admin@hadir.com</strong><br>
+                                &bull; Password: <em>(Kosong / "")</em>
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Validasi form 'Password harus diisi' aktif.<br>
+                                &bull; Actual: <strong>PASSED (Request diblokir pada client side, tetap di form login)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin login page<br>
+                        <span class="bdd-when bdd-keyword">When</span> User enters email <span class="bdd-str">"admin@hadir.com"</span> and leaves password blank<br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the login button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Form validation message for required password should be displayed
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 6: Login Invalid Email Format -->
+            <div class="test-case-item" data-module="login" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-06</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Login Admin dengan format email tidak valid</div>
+                        <div class="tc-desc">Memastikan format email tanpa karakter '@' atau domain tidak valid ditolak.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Email: <strong>adminhadircom</strong> (Format invalid)<br>
+                                &bull; Password: <strong>MagangSQA_JC@123</strong>
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Validasi regex email menampilkan 'Format email tidak valid'.<br>
+                                &bull; Actual: <strong>PASSED (Validasi format email terpicu dengan sempurna)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin login page<br>
+                        <span class="bdd-when bdd-keyword">When</span> User enters invalid format email <span class="bdd-str">"adminhadircom"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the login button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Format validation warning should appear on email input
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 7: Toggle Show/Hide Password -->
+            <div class="test-case-item" data-module="login" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LOG-07</div>
+                    <div><span class="tc-module-tag"><i class="fa-solid fa-right-to-bracket"></i> Login</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Toggle visibilitas show / hide password</div>
+                        <div class="tc-desc">Memverifikasi ikon mata (eye icon) mengubah tipe input password menjadi text dan sebaliknya.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Password Input: <strong>MagangSQA_JC@123</strong><br>
+                                &bull; Action: Click Eye Adornment Icon
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Atribut type berubah dari type='password' ke type='text', lalu kembali ke 'password'.<br>
+                                &bull; Actual: <strong>PASSED (DOM attribute updated dynamically)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User enters password in password field<br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks password visibility toggle icon<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Password input type should switch to <span class="bdd-str">"text"</span><br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks visibility toggle icon again<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Password input type should switch back to <span class="bdd-str">"password"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ADMIN LOGOUT ==================== -->
+
+            <!-- TC 8: Logout Valid -->
+            <div class="test-case-item" data-module="logout" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LGO-01</div>
+                    <div><span class="tc-module-tag" style="background: rgba(244, 63, 94, 0.15); color: #fda4af;"><i class="fa-solid fa-right-from-bracket"></i> Logout</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Logout Admin melalui menu dropdown profile</div>
+                        <div class="tc-desc">Memastikan user admin dapat logout dengan sukses melalui menu avatar di pojok kanan atas.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Initial State: Logged in as Admin<br>
+                                &bull; Target Menu: Avatar Profile -> Opsi 'Logout' / 'Keluar'
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Session auth dihapus, user diarahkan kembali ke URL login /authentication/login.<br>
+                                &bull; Actual: <strong>PASSED (Redirected to login page, localStorage token purged)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is already logged in as Admin<br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks on the admin profile avatar<br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the <span class="bdd-str">"Logout"</span> button in dropdown<br>
+                        <span class="bdd-then bdd-keyword">Then</span> User should be redirected to the Hadir Admin login page<br>
+                        <span class="bdd-and bdd-keyword">And</span> Auth token in browser storage should be cleared
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 9: Form Login Clean State Post-Logout -->
+            <div class="test-case-item" data-module="logout" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LGO-02</div>
+                    <div><span class="tc-module-tag" style="background: rgba(244, 63, 94, 0.15); color: #fda4af;"><i class="fa-solid fa-right-from-bracket"></i> Logout</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Verifikasi state halaman login bersih setelah logout</div>
+                        <div class="tc-desc">Memastikan setelah logout form login tampil bersih tanpa meninggalkan cache kredensial.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Post Logout Verification<br>
+                                &bull; Target Element: Input Email & Password Value
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Input email dan password bernilai kosong dan tombol submit aktif siap digunakan.<br>
+                                &bull; Actual: <strong>PASSED (Form fields are clean and ready for new session)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User has successfully logged out<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Login form should display empty email and password inputs<br>
+                        <span class="bdd-and bdd-keyword">And</span> Login button should be clickable
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 10: Browser Back Button Security -->
+            <div class="test-case-item" data-module="logout" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LGO-03</div>
+                    <div><span class="tc-module-tag" style="background: rgba(244, 63, 94, 0.15); color: #fda4af;"><i class="fa-solid fa-right-from-bracket"></i> Logout</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Proteksi navigasi Browser Back button setelah logout</div>
+                        <div class="tc-desc">Memastikan user tidak dapat kembali mengakses dashboard menggunakan tombol Back setelah logout.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Trigger: `driver.navigate().back()` post logout action
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Sistem route guard mencegat request dan me-redirect paksa kembali ke login.<br>
+                                &bull; Actual: <strong>PASSED (Route Guard intercepted, unauthorized access prevented)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User has logged out from Admin portal<br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks browser Back button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Session guard should intercept and force redirect to login page
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 11: Direct Protected Route Access -->
+            <div class="test-case-item" data-module="logout" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-LGO-04</div>
+                    <div><span class="tc-module-tag" style="background: rgba(244, 63, 94, 0.15); color: #fda4af;"><i class="fa-solid fa-right-from-bracket"></i> Logout</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Akses URL langsung ke Protected Admin Dashboard tanpa session</div>
+                        <div class="tc-desc">Memastikan URL dashboard (/dashboards/crm) tidak dapat dibuka langsung tanpa token aktif.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Target Direct URL: <strong>/dashboards/crm</strong> (Unauthenticated state)
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Redirect otomatis ke /authentication/login.<br>
+                                &bull; Actual: <strong>PASSED (Auth Guard successfully protected private routes)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User has no active authentication token<br>
+                        <span class="bdd-when bdd-keyword">When</span> User directly accesses protected URL <span class="bdd-str">"/dashboards/crm"</span><br>
+                        <span class="bdd-then bdd-keyword">Then</span> User should be redirected to login page with unauthorized status
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ADMIN DASHBOARD ==================== -->
+
+            <!-- TC 12: Dashboard Summary Cards -->
+            <div class="test-case-item" data-module="dashboard" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-01</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Verifikasi 4 Kartu Ringkasan Statistik Utama di Dashboard</div>
+                        <div class="tc-desc">Memastikan kartu Total Semua Karyawan, Total Absen Hari Ini, Sedang WFH, dan Sedang Cuti tampil akurat.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; 4 Summary Cards: Total Karyawan, Absen Hari Ini, WFH, Cuti<br>
+                                &bull; Page: Admin CRM Dashboard
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Seluruh 4 kartu ringkasan ter-render dengan angka metrik yang valid dan teks label jelas.<br>
+                                &bull; Actual: <strong>PASSED (All summary cards are displayed correctly)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin Dashboard<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Dashboard should display summary card for <span class="bdd-str">"Total semua karyawan"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> Dashboard should display summary card for <span class="bdd-str">"Total absen hari ini"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> Dashboard should display summary card for <span class="bdd-str">"sedang WFH"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> Dashboard should display summary card for <span class="bdd-str">"sedang cuti"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 13: Sidebar Navigation -->
+            <div class="test-case-item" data-module="dashboard" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-02</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Navigasi Sidebar Menu Admin dan Drawer Collapse</div>
+                        <div class="tc-desc">Memverifikasi drawer navigasi menu utama (Master Data, Management User, Laporan) dapat diakses responsif.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Menu Items: Dashboard, Master Data, Management User, Laporan<br>
+                                &bull; Component: Sidebar Navigation Tree
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Menu sidebar dapat di-expand/collapse dan navigasi berpindah rute dengan mulus.<br>
+                                &bull; Actual: <strong>PASSED (Sidebar tree menus responsive, active state highlight working)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Hadir Admin Dashboard<br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks on sidebar menu drawer<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Submenu options should be visible and accessible
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 14: Filter Date Pending Approval -->
+            <div class="test-case-item" data-module="dashboard" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-03</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Filter data Pending Approval berdasarkan rentang tanggal</div>
+                        <div class="tc-desc">Memilih rentang Start Date dan End Date lalu mengklik tombol Search untuk memfilter tabel pengajuan.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Start Date: <strong>25-08-2026</strong><br>
+                                &bull; End Date: <strong>03-09-2026</strong><br>
+                                &bull; Action: Click Search Button
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Tabel me-refresh dan hanya memuat data pengajuan dalam rentang 25/08 s.d 03/09.<br>
+                                &bull; Actual: <strong>PASSED (Table filter applied, record list matched date range)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User navigates to Pending Approval section on Dashboard<br>
+                        <span class="bdd-when bdd-keyword">When</span> User inputs start date <span class="bdd-str">"25-08-2026"</span> and end date <span class="bdd-str">"03-09-2026"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the search filter button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Pending table should filter and display records within date range
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 15: Reset Filter -->
+            <div class="test-case-item" data-module="dashboard" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-04</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Fitur Reset filter tanggal di Dashboard</div>
+                        <div class="tc-desc">Memverifikasi tombol Reset mengosongkan tanggal dan mengembalikan tampilan tabel ke kondisi awal.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Action: Click Reset Button
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Input tanggal kembali kosong dan seluruh data pending ditampilkan kembali.<br>
+                                &bull; Actual: <strong>PASSED (Inputs cleared, table state restored to default)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> Filter tanggal telah diterapkan pada Dashboard<br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks the Reset button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Date filter fields should be cleared<br>
+                        <span class="bdd-and bdd-keyword">And</span> Default unfiltered data table should be displayed
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 16: Ubah Password Quick Action -->
+            <div class="test-case-item" data-module="dashboard" data-type="positive">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-05</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Positif] Akses menu Ubah Password dari profile admin</div>
+                        <div class="tc-desc">Memastikan opsi 'Ubah Password' di menu avatar membuka dialog atau halaman pergantian sandi.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-positive"><i class="fa-solid fa-circle-check"></i> Positif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Trigger: Profile Avatar -> Ubah Password
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Modal / form Ubah Password berhasil terbuka dengan field Password Lama, Baru, dan Konfirmasi.<br>
+                                &bull; Actual: <strong>PASSED (Change password modal rendered correctly)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Admin Dashboard<br>
+                        <span class="bdd-when bdd-keyword">When</span> User clicks on the admin profile avatar<br>
+                        <span class="bdd-and bdd-keyword">And</span> User selects <span class="bdd-str">"Ubah Password"</span> option<br>
+                        <span class="bdd-then bdd-keyword">Then</span> Change password dialog or form should appear
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 17: Filter Invalid Date Range -->
+            <div class="test-case-item" data-module="dashboard" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-06</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Filter Dashboard dengan rentang tanggal invalid (Start > End)</div>
+                        <div class="tc-desc">Memastikan sistem menangani input tanggal awal lebih besar dari tanggal akhir tanpa crash.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Start Date: <strong>30-09-2026</strong><br>
+                                &bull; End Date: <strong>01-09-2026</strong> (Invalid range)
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Menampilkan notifikasi validasi tanggal atau empty state 'Data Tidak Ditemukan'.<br>
+                                &bull; Actual: <strong>PASSED (Sistem stabil, empty table / no data placeholder ditampilkan)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Admin Dashboard filter form<br>
+                        <span class="bdd-when bdd-keyword">When</span> User inputs start date <span class="bdd-str">"30-09-2026"</span> and end date <span class="bdd-str">"01-09-2026"</span><br>
+                        <span class="bdd-and bdd-keyword">And</span> User clicks the search filter button<br>
+                        <span class="bdd-then bdd-keyword">Then</span> System should show validation message or empty state without crashing
+                    </div>
+                </div>
+            </div>
+
+            <!-- TC 18: Read Only Card Interaction -->
+            <div class="test-case-item" data-module="dashboard" data-type="negative">
+                <div class="tc-header" onclick="toggleDetails(this)">
+                    <div class="tc-id">TC-DSH-07</div>
+                    <div><span class="tc-module-tag" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc;"><i class="fa-solid fa-gauge-high"></i> Dashboard</span></div>
+                    <div class="tc-title-wrapper">
+                        <div class="tc-title">[Negatif] Percobaan interaksi klik pada kartu ringkasan read-only</div>
+                        <div class="tc-desc">Memastikan klik pada kartu display-only tidak memicu redirect tidak valid atau error JS.</div>
+                    </div>
+                    <div class="tc-hide-mobile"><span class="badge badge-negative"><i class="fa-solid fa-triangle-exclamation"></i> Negatif</span></div>
+                    <div><span class="badge badge-status-pass"><i class="fa-solid fa-check"></i> PASSED</span></div>
+                    <div class="tc-expand-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="tc-body">
+                    <div class="tc-detail-grid">
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-database"></i> Test Data & Parameter</div>
+                            <div class="pane-content">
+                                &bull; Target Card: 'Total semua karyawan' stat card
+                            </div>
+                        </div>
+                        <div class="detail-pane">
+                            <div class="pane-heading"><i class="fa-solid fa-bullseye"></i> Expected vs Actual Result</div>
+                            <div class="pane-content">
+                                &bull; Expected: Halaman tetap stabil di dashboard tanpa terjadinya broken link atau error console.<br>
+                                &bull; Actual: <strong>PASSED (No unwanted navigation, page remains steady)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bdd-steps">
+                        <span class="bdd-given bdd-keyword">Given</span> User is on Admin Dashboard<br>
+                        <span class="bdd-when bdd-keyword">When</span> User attempts to click on read-only summary card <span class="bdd-str">"Total semua karyawan"</span><br>
+                        <span class="bdd-then bdd-keyword">Then</span> The card should not perform navigation and remain on the dashboard
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>Laporan Testing Result Otomatis - Admin Suite</strong></p>
+            <p style="margin-top: 4px;">Dikembangkan oleh Kelompok 1 &bull; SQA Batch 14 JuaraCoding &bull; Framework Selenium Cucumber BDD</p>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT FOR INTERACTIVITY & FILTERS -->
+    <script>
+        function toggleDetails(element) {
+            const parent = element.closest('.test-case-item');
+            parent.classList.toggle('expanded');
+        }
+
+        function filterModule(filterType, btnElement) {
+            // Update active tab button
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            const items = document.querySelectorAll('.test-case-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const module = item.getAttribute('data-module');
+                const type = item.getAttribute('data-type');
+
+                let match = false;
+                if (filterType === 'all') {
+                    match = true;
+                } else if (filterType === 'positive' && type === 'positive') {
+                    match = true;
+                } else if (filterType === 'negative' && type === 'negative') {
+                    match = true;
+                } else if (module === filterType) {
+                    match = true;
+                }
+
+                if (match) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('totalScenariosCount').textContent = visibleCount;
+        }
+
+        function searchTestCases() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.test-case-item');
+            let count = 0;
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                    count++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('totalScenariosCount').textContent = count;
+        }
+
+        // Initialize counts dynamically on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const allItems = document.querySelectorAll('.test-case-item');
+            const loginItems = document.querySelectorAll('.test-case-item[data-module="login"]');
+            const logoutItems = document.querySelectorAll('.test-case-item[data-module="logout"]');
+            const dashboardItems = document.querySelectorAll('.test-case-item[data-module="dashboard"]');
+            const posItems = document.querySelectorAll('.test-case-item[data-type="positive"]');
+            const negItems = document.querySelectorAll('.test-case-item[data-type="negative"]');
+
+            document.getElementById('countAll').textContent = allItems.length;
+            document.getElementById('countLogin').textContent = loginItems.length;
+            document.getElementById('countLogout').textContent = logoutItems.length;
+            document.getElementById('countDashboard').textContent = dashboardItems.length;
+            document.getElementById('countPos').textContent = posItems.length;
+            document.getElementById('countNeg').textContent = negItems.length;
+        });
+    </script>
+
+</body>
+</html>
