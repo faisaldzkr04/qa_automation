@@ -8,5 +8,11 @@
         </classes>
     </test>
 
+    <!--<test name="REST Assured API Automation Tests">
+        <classes>
+            <class name="com.finalproject1.runners.ApiTestRunner"/>
+        </classes>
+    </test>-->
+
 </suite>
 
